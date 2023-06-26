@@ -1,0 +1,91 @@
+.boats-list {
+  font-size: 18px;
+  max-height: 100%;
+  overflow-y: auto;
+
+  &__title {
+    color: #6898f2;
+    padding: 0 5px;
+    margin-bottom: math.div($def-space, 2);
+  }
+
+  &__item {
+    color: #444444;
+    border-bottom: 1px solid #caced2;
+    padding: math.div($def-space, 2) 5px;
+    margin-bottom: math.div($def-space, 2);
+    @include make-flex("space-between");
+    @include def-background("15px", "center right 5px");
+    padding-right: 35px;
+    background-image: url($image-path + "icons/arrow-right.svg");
+
+    &-type {
+      font-size: 16px;
+      display: flex;
+
+      div {
+        margin-right: 5px;
+        padding-right: 5px;
+        font-size: 14px;
+        position: relative;
+
+        &:after {
+          width: 2px;
+          height: 100%;
+          display: block;
+          position: absolute;
+          right: 2px;
+          top: 0;
+          content: "/";
+        }
+
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+      span {
+        position: relative;
+        padding-left: 10px;
+        margin-right: 5px;
+        color: #caced2;
+        text-transform: capitalize;
+
+        &:after {
+          width: 5px;
+          height: 5px;
+          display: block;
+          border-radius: 50%;
+          content: "";
+          position: absolute;
+          @include def-position();
+          right: auto;
+          margin: auto;
+          background-color: #caced2;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: #e5eaef;
+    }
+  }
+
+  &__booking-date {
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 5px 5px 5px 25px;
+    background-repeat: no-repeat;
+    background-position: left 5px center;
+    background-image: url($image-path + "icons/alert-circle.svg");
+    background-size: 16px 16px;
+    background-color: #e5eaef59;
+  }
+
+  &__aside {
+    display: flex;
+    align-items: center;
+  }
+}

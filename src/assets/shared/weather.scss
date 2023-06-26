@@ -1,0 +1,228 @@
+.weather {
+  color: $G-50-Lit-Grape;
+  height: 100%;
+
+  &__header {
+    font-size: 12px;
+    margin-bottom: 10px;
+
+    &-title {
+      text-align: center;
+      font-size: 16px;
+      margin-left: 5px;
+    }
+  }
+
+  &__light {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    margin: auto;
+    border-radius: 50%;
+
+    &--red {
+      background-color: $trafficRed;
+    }
+
+    &--yellow {
+      background-color: $trafficYellow;
+    }
+
+    &--green {
+      background-color: $trafficGreen;
+    }
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__block {
+    max-width: 150px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 15px;
+    color: $G-50-Lit-Grape;
+    text-align: center;
+    border-top: 4px solid #7ec980;
+
+    &--green {
+      border-top-color: $trafficGreen;
+    }
+
+    &--yellow {
+      border-top-color: $trafficYellow;
+    }
+
+    &--red {
+      border-top-color: $trafficRed;
+    }
+
+    &--light {
+      max-width: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      border-top-color: transparent;
+
+      .weather__block--placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &-conditions {
+      font-size: 15px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    &-title {
+      font-size: 12px;
+      font-family: Outfit, sans-serif;
+      font-weight: 600;
+    }
+
+    &-icon {
+      width: 30px;
+      height: 30px;
+      margin: auto auto 5px auto;
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+
+      &--water-temperature {
+        background-image: url($image-path + "icons/temerature.svg");
+      }
+
+      &--thermometer {
+        background-image: url($image-path + "icons/Air-Temperature.svg");
+      }
+
+      &--DRAIN {
+        background-image: url($image-path + "icons/Discharge-Volume.svg");
+      }
+
+      &--lvl {
+        background-image: url($image-path + "icons/Water-Level.svg");
+      }
+
+      &--wind {
+        background-image: url($image-path + "icons/Wind-Speed.svg");
+      }
+    }
+
+    // &.condition-blocked {
+    //   border-color: $trafficRed;
+
+    //   .weather__block-conditions {
+    //     color: $trafficRed;
+    //   }
+
+    //   .weather__block-icon {
+    //     &--water-temperature {
+    //       background-image: url($image-path + "icons/temerature-red.svg");
+    //     }
+
+    //     &--thermometer {
+    //       background-image: url($image-path + "icons/Air-Temperature-red.svg");
+    //     }
+
+    //     &--DRAIN {
+    //       background-image: url($image-path + "icons/Discharge-Volume-red.svg");
+    //     }
+
+    //     &--lvl {
+    //       background-image: url($image-path + "icons/Water-Level-red.svg");
+    //     }
+
+    //     &--wind {
+    //       background-image: url($image-path + "icons/Wind-Speed-red.svg");
+    //     }
+    //   }
+    // }
+  }
+}
+
+.traffic-light-manual {
+  position: relative;
+
+  &__drop-down {
+    min-width: 230px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    padding: 15px;
+    font-size: 12px;
+    border-radius: 5px;
+    transform: translate(0%, 10%);
+    background-color: white;
+    border: 1px solid #caced2;
+    z-index: 150;
+    display: none;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-weight: bold;
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      &-selector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        flex-shrink: 0;
+        width: 15px;
+        height: 15px;
+        position: relative;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid #cecece;
+      }
+
+      &.active {
+        .traffic-light-manual__drop-down-item {
+          &-selector {
+            &:after {
+              display: block;
+              width: 80%;
+              height: 80%;
+              content: "";
+              border-radius: 50%;
+              background-color: #6898f2;
+            }
+          }
+        }
+      }
+    }
+
+    &-container {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    margin-bottom: 7px;
+    color: #6898f2;
+    text-align: left;
+  }
+
+  &.active {
+    .traffic-light-manual {
+      &__drop-down {
+        display: block;
+      }
+    }
+  }
+}

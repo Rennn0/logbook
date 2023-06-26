@@ -1,0 +1,29 @@
+.message-box {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 3500;
+
+  //
+  &__item {
+    opacity: 0;
+    visibility: hidden;
+    @include make-flex;
+    padding: 10px;
+    border: 1px solid #dcdfe1;
+    border-right: 2px solid red;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    transition: all .3s ease-in-out;
+    animation: show-message-box .3s linear 1 forwards;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin: auto;
+    }
+  }
+}

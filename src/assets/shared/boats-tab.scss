@@ -1,0 +1,58 @@
+.boats-tab {
+  height: 100%;
+  &__header {
+    height: 65px;
+
+    .btn--tab {
+      width: 25%;
+      height: 100%;
+    }
+  }
+
+  &__container {
+    height: 100%;
+    background-color: #fff;
+  }
+
+  &__body {
+    padding: 0 math.div($def-space, 2);
+    height: calc(100% - 165px);
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__search-fieldset {
+    margin: 20px 0;
+
+    &--search {
+      .form-fieldset {
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  &__select-element {
+    margin: 20px 10px 20px 0;
+    select,
+    .form__dropdown {
+      min-width: 250px;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      padding: 15px;
+      border: 1px solid #d1d4d7;
+      border-radius: 8px;
+      background-color: #e5eaef59;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}

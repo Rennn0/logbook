@@ -1,0 +1,22 @@
+.page {
+
+  &--header-placeholder {
+    padding-top: $header-space;
+  }
+
+  &--home {
+    display: flex;
+  }
+
+  &__boats-container {
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid #caced2;
+  }
+
+  &__chosen-boat {
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+  }
+}

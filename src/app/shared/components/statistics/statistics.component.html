@@ -1,0 +1,237 @@
+<div class="statistics">
+  <div class="statistics__header">
+    <div
+      class="statistics__header-left out-box--click"
+      (click)="toggleStatisticNavigationDisplay()"
+    >
+      <div class="statistics__header-left-nav">
+        <button class="btn btn--statistics-nav out-box--click"></button>
+        <div
+          class="header-statistics-navigation__content"
+          [class.active]="toggleStatisticNavigation"
+        >
+          <ng-container *ngFor="let item of publicStatisticsNavigation">
+            <div
+              (click)="chooseAndOpenStatisticType(item?.value)"
+              class="header-statistics-navigation__item out-box--click"
+            >
+              {{ item?.label }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="statistics__header-title out-box--click">
+        {{ pageInfo?.label }}
+      </div>
+    </div>
+    <div class="statistics__header-right">
+      <button class="btn btn--close" (click)="closeStatisticsPage()"></button>
+    </div>
+  </div>
+  <div class="statistics__body">
+    <div class="statistics__body-header">
+      <ng-container
+        *ngIf="
+          statesService.chosenStatisticsType ===
+          publicStatisticsEnum?.logbookSingleBoat
+        "
+      >
+        <div
+          class="boats-tab__search-fieldset boats-tab__search-fieldset--search d-flex"
+        >
+          <input
+            class="form-fieldset"
+            type="text"
+            name="search"
+            (input)="filterBoats()"
+            placeholder="{{ publicLanguageGer?.wordEnterBoatName }}"
+            title="{{ publicLanguageGer?.wordEnterBoatName }}"
+            [formControl]="searchInput"
+          />
+          <button class="btn btn--search"></button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="responseData?.header?.date">
+        <div class="statistics__body-header-item">
+          <div
+            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--date"
+          ></div>
+          <div class="statistics__body-header-item-description">
+            <div class="statistics__body-header-item-description-title">
+              {{ publicLanguageGer?.wordEvaluationPeriod }}:
+            </div>
+            <div class="statistics__body-header-item-description-sub-title">
+              {{ statisticsEvaluationPeriod }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="responseData?.header?.sessionsCount">
+        <div class="statistics__body-header-item">
+          <div
+            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--count"
+          ></div>
+          <div class="statistics__body-header-item-description">
+            <div class="statistics__body-header-item-description-title">
+              {{ publicLanguageGer?.wordNumberOfTrips }}:
+            </div>
+            <div class="statistics__body-header-item-description-sub-title">
+              {{ responseData?.header?.sessionsCount }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="responseData?.header?.distance">
+        <div class="statistics__body-header-item">
+          <div
+            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--allKilometer"
+          ></div>
+          <div class="statistics__body-header-item-description">
+            <div class="statistics__body-header-item-description-title">
+              {{ publicLanguageGer?.wordTotalKilometers }}:
+            </div>
+            <div class="statistics__body-header-item-description-sub-title">
+              {{ responseData?.header?.distance }} km
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="statistics__body-table">
+      <table class="table">
+        <thead>
+          <ng-container
+            *ngIf="
+              statesService.chosenStatisticsType !==
+              publicStatisticsEnum?.logbookStatistics
+            "
+          >
+            <th>No.</th>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              statesService.chosenStatisticsType ===
+                publicStatisticsEnum?.KilometerStatistics ||
+              statesService?.chosenStatisticsType ===
+                publicStatisticsEnum?.CommerzbankStatistics ||
+              statesService?.chosenStatisticsType ===
+                publicStatisticsEnum?.VenezianerStatisticsPersonal
+            "
+          >
+            <th>{{ publicLanguageGer?.wordName }}</th>
+            <th>{{ publicLanguageGer?.wordKilometre }}</th>
+            <th>{{ publicLanguageGer?.wordRides }}</th>
+            <th>{{ publicLanguageGer?.wordKmJourney }}</th>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              statesService.chosenStatisticsType !==
+                publicStatisticsEnum?.KilometerStatistics &&
+              statesService.chosenStatisticsType !==
+                publicStatisticsEnum?.CommerzbankStatistics &&
+              statesService?.chosenStatisticsType !==
+                publicStatisticsEnum?.VenezianerStatisticsPersonal
+            "
+          >
+            <th>{{ publicLanguageGer?.wordDate }}</th>
+            <th>{{ publicLanguageGer?.wordBoat }}</th>
+            <th>{{ publicLanguageGer?.wordHelmsman }}</th>
+            <th>{{ publicLanguageGer?.wordGuests }}</th>
+            <th>{{ publicLanguageGer?.wordTeam }}</th>
+            <th>{{ publicLanguageGer?.wordDeparture }}</th>
+            <th>{{ publicLanguageGer?.wordArrival }}</th>
+            <th>{{ publicLanguageGer?.wordGoal }}</th>
+            <th>{{ publicLanguageGer?.wordKilometre }}</th>
+          </ng-container>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of filteredData; let i = index">
+            <tr>
+              <ng-container
+                *ngIf="
+                  statesService.chosenStatisticsType !==
+                  publicStatisticsEnum?.logbookStatistics
+                "
+              >
+                <td>{{ i + 1 }}</td>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  statesService?.chosenStatisticsType ===
+                    publicStatisticsEnum?.KilometerStatistics ||
+                    statesService?.chosenStatisticsType ===
+                      publicStatisticsEnum?.CommerzbankStatistics ||
+                    statesService?.chosenStatisticsType ===
+                      publicStatisticsEnum?.VenezianerStatisticsPersonal;
+                  else defaultStats
+                "
+              >
+                <td>{{ item?.user }}</td>
+                <td class="statistics-indicator-container">
+                  <div class="d-flex-container">
+                    <div
+                      class="statistics-indicator"
+                      [style.width.px]="item?.km"
+                    ></div>
+                    {{ item?.km }} km
+                  </div>
+                </td>
+                <td>{{ item?.sessions }}</td>
+                <td>{{ item?.averageKM }} km</td>
+              </ng-container>
+              <ng-template #defaultStats>
+                <td>
+                  <ng-container *ngIf="item?.startDate && statesService.chosenStatisticsType !== publicStatisticsEnum?.logbookStatistics">
+                    {{ item?.startDate | date : "dd.MM.yyyy" }}
+                  </ng-container>
+
+                  <ng-container *ngIf="item?.endDate && statesService.chosenStatisticsType === publicStatisticsEnum?.logbookStatistics">
+                    {{ item?.endDate | date : "dd.MM.yyyy" }}
+                  </ng-container>
+                </td>
+                <td>{{ item?.boatModifyName }}</td>
+                <td>{{ item?.coxModifyName }}</td>
+                <td>
+                  <ng-container *ngFor="let element of item?.guests">
+                    <span class="text-spacer">{{ element }}</span>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container
+                    *ngFor="let element of item?.crew; let i = index"
+                  >
+                    <span
+                      class="text-spacer"
+                      [ngClass]="{
+                        'text-spacer--bold': item?.helper === element
+                      }"
+                      >{{ item?.modifyName[i] }}</span
+                    >
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngIf="item?.startDate">
+                    {{ item?.startDate | date : "HH:mm" }}
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngIf="item?.endDate">
+                    {{ item?.endDate | date : "HH:mm" }}
+                  </ng-container>
+                </td>
+                <td>{{ item?.route }}</td>
+                <td>{{ item?.distance }} km</td>
+              </ng-template>
+            </tr>
+          </ng-container>
+          <!-- <ng-container *ngIf="!filteredData?.length">
+            <tr>
+              ....
+            </tr>
+          </ng-container> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

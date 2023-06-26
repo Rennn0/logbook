@@ -1,0 +1,122 @@
+.session-window {
+    width: 100%;
+    height: 100%;
+    padding: $def-space;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2600;
+    background-color: #2f2f2f9e;
+
+    &.active {
+        display: block;
+    }
+
+    &__backworld {
+        position: absolute;
+        @include def-position();
+        z-index: 0;
+    }
+
+    &__notifications {
+        width: 60%;
+        height: 50px;
+        font-size: 12px;
+        margin: math.div($def-space, 2) auto;
+        display: flex;
+        align-items: center;
+        color: #d73d3d;
+        padding: 0 10px;
+
+        span {
+            margin-right: 5px;
+
+            &:first-child {
+                margin-left: 5px;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &--danger {
+            border: 1px solid #eb5a5a;
+            border-radius: 8px;
+            background-color: #eb5a5a26;
+        }
+    }
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 5;
+        border-radius: $def-radius;
+        padding: math.div($def-space, 2);
+        background-color: #fff;
+
+        &-headers {
+            @include make-flex("space-between");
+            height: 60px;
+            border-bottom: 1px solid #caced2;
+        }
+    }
+
+    &__title {
+        color: #2d418d;
+        font-size: 24px;
+    }
+
+    &__body {
+        max-height: calc(100% - 160px);
+        min-height: calc(100% - 160px);
+        overflow-y: auto;
+
+        &-title {
+            padding-top: $def-space * 2;
+            margin-bottom: 5px;
+            font-size: 24px;
+            color: #636363;
+            text-align: center;
+        }
+
+        &-boat-title {
+            color: #444444;
+            font-size: 48px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+    }
+
+    &__footer {
+        @include make-flex("space-between");
+        height: 100px;
+    }
+
+    &__aside {
+        .icon {
+            svg {
+                line {
+                    color: #444444;
+                    fill: #444444;
+                    stroke: #444444;
+                }
+            }
+        }
+    }
+
+    .form,
+    .session-window__footer {
+        width: 60%;
+        margin: auto;
+        padding: $def-space 0;
+    }
+
+    .form {
+        padding: math.div($def-space, 2) 0;
+    }
+}

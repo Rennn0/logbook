@@ -1,0 +1,28 @@
+<div class="auth">
+  <div class="auth__container">
+    <div class="auth__placeholder">
+      <!-- <div class="auth__title">Signing with Google 2</div> -->
+      <div>
+        <ng-container *ngIf="!googleSigninService?.isLoading">
+          <button class="btn btn--success btn--signIn-type" (click)="signIn_()">
+            Authentication
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="googleSigninService?.isLoading">
+          <div class="spinner-container">
+            <span class="spinner">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+        </ng-container>
+      </div>
+      <!-- <div class="text-center m-2">
+        <button class="btn" (click)="signOut_()">signOut google</button>
+      </div> -->
+    </div>
+  </div>
+</div>

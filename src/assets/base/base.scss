@@ -1,0 +1,60 @@
+/*bases*/
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: map-get($font-names, regular);
+  color: #444444;
+  background-color: #f6f8fa;
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+a {
+  color: #444444;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input:focus {
+  outline: none;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  &.active {
+  }
+}
+
+app-root,
+app-home {
+  display: block;
+  height: 100%;
+}
+
+.text-spacer {
+  position: relative;
+
+  &--bold {
+    font-weight: bold;
+    color: #2d418d;
+  }
+
+  &::after {
+    content: ", ";
+  }
+
+  &:last-child {
+    &::after {
+      content: "";
+    }
+  }
+}

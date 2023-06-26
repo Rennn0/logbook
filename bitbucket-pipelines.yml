@@ -1,0 +1,60 @@
+image: node:16
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Build and Deploy
+          caches:
+            - node
+            - docker
+          script:
+            - cd src
+            - npm install
+            - npm run build -- --configuration=production --deploy-url=/
+            - cd ../dist/booking-frontend
+            - ls
+            - pipe: atlassian/google-cloud-storage-deploy:1.0.1
+              variables:
+                KEY_FILE: $KEY_FILE
+                PROJECT: $PROJECT
+                ACL: "public-read"
+                BUCKET: $BUCKET
+                SOURCE: $SOURCE
+                CACHE_CONTROL: max-age=0
+      - step:
+          name: disable cache control
+          image: google/cloud-sdk:latest
+          script:
+            - echo -n $KEY_FILE | base64 -di > key.json
+            - gcloud auth activate-service-account 541247734652-compute@developer.gserviceaccount.com --key-file=key.json
+            - gcloud config set project frgg-1869
+            - gsutil setmeta -r -h "Cache-control:max-age=0" gs://logbook-frontend
+    dev:
+    - step:
+        name: Build and Deploy
+        caches:
+          - node
+          - docker
+        script:
+          - cd src
+          - npm install
+          - npm run build -- --configuration=production --deploy-url=/
+          - cd ../dist/booking-frontend
+          - ls
+          - pipe: atlassian/google-cloud-storage-deploy:1.0.1
+            variables:
+              KEY_FILE: $KEY_FILE
+              PROJECT: $PROJECT
+              ACL: "public-read"
+              BUCKET: $BUCKET_Dev
+              SOURCE: $SOURCE
+              CACHE_CONTROL: max-age=0
+    - step:
+        name: disable cache control
+        image: google/cloud-sdk:latest
+        script:
+          - echo -n $KEY_FILE | base64 -di > key.json
+          - gcloud auth activate-service-account 541247734652-compute@developer.gserviceaccount.com --key-file=key.json
+          - gcloud config set project frgg-1869
+          - gsutil setmeta -r -h "Cache-control:max-age=0" gs://logbook-frontend-dev

@@ -1,0 +1,35 @@
+.modal {
+  width: 380px;
+  height: 300px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  background-color: #fff;
+  display: block;
+  z-index: 2900;
+
+  header {
+    position: relative;
+  }
+
+  &-btn--close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  &-mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 2600;
+    background-color: rgba(0, 0, 0, 0.38);
+  }
+}

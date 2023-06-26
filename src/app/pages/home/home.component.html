@@ -1,0 +1,543 @@
+<ng-container *ngIf="!statesService?.isHealth">
+  <div class="healthcheck">
+    <div class="healthcheck__header">
+      <div class="healthcheck__title">
+        Leider ist das System gerade verfügbar. Es wird mit Hochdruck an der
+        Lösung gearbeitet. Bitte entschuldn sie die Unannehmlichkeiten.
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div class="page page--header-placeholder page--home h-100">
+  <div class="page__boats-container">
+    <div class="boats-tab">
+      <div class="boats-tab__container">
+        <div class="boats-tab__header">
+          <button
+            class="btn btn--tab"
+            [class.active]="chosenTabIndex === publicBoatsStatusEnum?.Available"
+            (click)="
+              setBoatsByStatus('AVAILABLE', publicBoatsStatusEnum?.Available)
+            "
+          >
+            {{ publicLanguageGer?.availableButton }}
+          </button>
+          <button
+            class="btn btn--tab"
+            [class.active]="
+              chosenTabIndex === publicBoatsStatusEnum?.NOT_AVAILABLE
+            "
+            (click)="
+              setBoatsByStatus(
+                'NOT_AVAILABLE',
+                publicBoatsStatusEnum?.NOT_AVAILABLE
+              )
+            "
+          >
+            {{ publicLanguageGer?.onWaterButton }}
+          </button>
+          <button
+            class="btn btn--tab"
+            [class.active]="chosenTabIndex === publicBoatsStatusEnum?.DAMAGED"
+            (click)="
+              setBoatsByStatus('DAMAGED', publicBoatsStatusEnum?.DAMAGED)
+            "
+          >
+            {{ publicLanguageGer?.notAvailable }}
+          </button>
+          <button
+            class="btn btn--tab"
+            [class.active]="chosenTabIndex === publicBoatsStatusEnum?.upcoming"
+            (click)="
+              setBoatsByStatus('upcoming', publicBoatsStatusEnum?.upcoming)
+            "
+          >
+            {{ publicLanguageGer?.upcoming }}
+          </button>
+        </div>
+        <div class="boats-tab__body">
+          <div class="boats-tab__body-header">
+            <ng-container *ngIf="isUserAdmin">
+              <div class="boats-tab__select-element">
+                <div
+                  class="form__dropdown out-box--click"
+                  [class.active]="
+                    isDropDownDisplay === publicDropDowns?.locationDropDown
+                  "
+                  (click)="toggleDropwDown(publicDropDowns?.locationDropDown)"
+                >
+                  <div
+                    class="form__dropdown-item form__dropdown-item--selected out-box--click"
+                  >
+                    {{ selectedLocation }}
+                  </div>
+                  <div class="form__dropdown-item-container">
+                    <div
+                      class="form__dropdown-item out-box--click"
+                      (click)="
+                        locationFilter(
+                          publicLanguageGer?.wordAllLocation,
+                          isDataDateFilterModue
+                        )
+                      "
+                    >
+                      {{ publicLanguageGer?.wordAllLocation }}
+                    </div>
+                    <ng-container *ngFor="let item of locations">
+                      <div
+                        class="form__dropdown-item out-box--click"
+                        (click)="locationFilter(item, isDataDateFilterModue)"
+                      >
+                        {{ item }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <!-- <select
+                  [formControl]="boatLocationFilterTag"
+                  (change)="locationFilter()"
+                >
+                  <option [ngValue]="'Alle Standort'" selected>
+                    Alle Standort
+                  </option>
+                  <ng-container *ngFor="let item of locations">
+                    <option [ngValue]="item">{{ item }}</option>
+                  </ng-container>
+                </select> -->
+              </div>
+            </ng-container>
+            <div
+              class="boats-tab__search-fieldset boats-tab__search-fieldset--search d-flex w-100"
+            >
+              <input
+                class="form-fieldset"
+                type="text"
+                name="search"
+                (input)="filterBoats(searchInput?.value, isDataDateFilterModue)"
+                placeholder="{{ publicLanguageGer?.boatSearchPlaceholder }}"
+                title="{{ publicLanguageGer?.boatSearchPlaceholder }}"
+                [formControl]="searchInput"
+              />
+              <button class="btn btn--search"></button>
+            </div>
+          </div>
+
+          <div class="boats-list">
+            <div class="boats-list__container">
+              <ng-container *ngIf="filteredData?.length; else noData">
+                <ng-container *ngFor="let item of filteredData; let i = index">
+                  <ng-container *ngIf="item?.length">
+                    <ng-container
+                      *ngIf="
+                        chosenTabIndex !== publicBoatsStatusEnum?.upcoming;
+                        else upcomingTemplate
+                      "
+                    >
+                      <div class="boats-list__title">
+                        {{
+                          functionalService.returnBoatSeatsTitleOnGer(
+                            responseDataKeys[i]
+                          )
+                        }}
+                      </div>
+                      <div class="boats-list__item-container">
+                        <ng-container
+                          *ngFor="let inItem of item; let inI = index"
+                        >
+                          <div
+                            class="boats-list__item"
+                            (click)="choseBoat(responseDataKeys[i], inI)"
+                          >
+                            <div class="boats-list__item-name">
+                              {{ inItem?.name }}
+                            </div>
+
+                            <ng-container *ngIf="inItem?.booking?.date">
+                              <div class="boats-list__booking-date">
+                                {{ publicLanguageGer?.wordBooked }}
+                                {{
+                                  functionalService.returnDateFromUTC(
+                                    inItem?.booking?.date,
+                                    true
+                                  ) | date : "HH:mm"
+                                }}
+                              </div>
+                            </ng-container>
+
+                            <div class="boats-list__aside">
+                              <ng-container *ngIf="isUserAdmin">
+                                <div class="boats-list__item-type">
+                                  <span></span>
+                                  <div class="boats-list__location">
+                                    {{ inItem?.location }}
+                                  </div>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="inItem?.competency">
+                                <div class="boats-list__item-type">
+                                  <span> Level:</span>
+                                  <ng-container
+                                    *ngFor="
+                                      let item of functionalService?.returnCompetency(
+                                        inItem?.competency
+                                      )
+                                    "
+                                  >
+                                    <div>{{ item }}</div>
+                                  </ng-container>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ng-container>
+                    <ng-template #upcomingTemplate>
+                      <div class="boats-list__title">
+                        {{ responseDataKeys[i] | date : "dd.MM.yyyy" }}
+                      </div>
+                      <div class="boats-list__item-container">
+                        <ng-container
+                          *ngFor="let inItem of item; let inI = index"
+                        >
+                          <div
+                            class="boats-list__item"
+                            (click)="choseDateFilterBoat(i, inI)"
+                          >
+                            <div class="boats-list__item-name">
+                              {{ inItem?.boat?.name }}
+                            </div>
+                            <div class="boats-list__aside">
+                              <ng-container *ngIf="isUserAdmin">
+                                <div class="boats-list__item-type">
+                                  <span></span>
+                                  <div class="boats-list__location">
+                                    {{ inItem?.boat?.location }}
+                                  </div>
+                                </div>
+                              </ng-container>
+                              <div class="boats-list__item-type">
+                                <span> Level:</span>
+                                <ng-container
+                                  *ngFor="
+                                    let item of functionalService?.returnCompetency(
+                                      inItem?.boat?.competency
+                                    )
+                                  "
+                                >
+                                  <div>{{ item }}</div>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ng-template>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-template #noData>
+                <div class="">{{ publicLanguageGer?.wordListElseText }}</div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page__chosen-boat">
+    <div class="chosen-boat" [class.disabled]="!chosenBoat">
+      <div class="chosen-boat__container">
+        <div class="chosen-boat__header">
+          <div class="chosen-boat__title">
+            <ng-container *ngIf="chosenBoat; else notSelected">
+              <div>{{ publicLanguageGer?.chosenBoatTitle }}</div>
+            </ng-container>
+            <ng-template #notSelected>
+              <ng-container *ngIf="filteredData?.length; else noDataToSelect">
+                <div class="chosen-boat__not-selected">
+                  {{ publicLanguageGer?.chooseBoatTitle }}
+                </div>
+              </ng-container>
+              <ng-template #noDataToSelect>
+                <div class="chosen-boat__not-selected"></div>
+              </ng-template>
+            </ng-template>
+
+            <div class="chosen-boat__sub-title">{{ chosenBoat?.name }}</div>
+          </div>
+
+          <div class="chosen-boat__type-group">
+            <ng-container *ngIf="isUserAdmin">
+              <div class="chosen-boat__type">{{ chosenBoat?.location }}</div>
+            </ng-container>
+            <ng-container *ngIf="chosenBoat?.category">
+              <div class="chosen-boat__type">
+                {{ replace(chosenBoat?.category) }}
+              </div>
+            </ng-container>
+            <div class="chosen-boat__type">{{ chosenBoat?.type }}</div>
+          </div>
+
+          <ng-container
+            *ngIf="
+              (chosenTabIndex === publicBoatsStatusEnum?.NOT_AVAILABLE &&
+                chosenBoat) ||
+              (chosenTabIndex === publicBoatsStatusEnum?.upcoming && chosenBoat)
+            "
+          >
+            <div class="chosen-boat__details-container">
+              <div class="chosen-boat__details-item">
+                <div class="chosen-boat__details-item-title">Abfahrt:</div>
+                <div class="chosen-boat__details-item-place-container">
+                  {{ chosenBoatStartDate | date : "dd.MM.yyyy | HH:mm" }}
+                </div>
+              </div>
+              <div class="chosen-boat__details-item">
+                <div class="chosen-boat__details-item-title">Mannschaft:</div>
+                <div
+                  class="chosen-boat__details-item-place-container chosen-boat__details-item-place-container--crew"
+                >
+                  <ng-container *ngIf="chosenBoat?.instigator">
+                    <div
+                      class="chosen-boat__details-item-place chosen-boat__details-item-place--crew"
+                    >
+                      {{ chosenBoat?.instigator }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngFor="let item of chosenBoat?.session?.crew">
+                    <div
+                      class="chosen-boat__details-item-place chosen-boat__details-item-place--crew"
+                    >
+                      {{ item?.firstName }} {{ item?.lastName }}
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngFor="let item of chosenBoat?.session?.guests"
+                  >
+                    <div
+                      class="chosen-boat__details-item-place chosen-boat__details-item-place--crew"
+                    >
+                      Gäste - {{ item?.name }}
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="chosenBoat?.session?.cox">
+                    <div
+                      class="chosen-boat__details-item-place chosen-boat__details-item-place--crew"
+                    >
+                      {{ chosenBoat?.session?.cox?.firstName }}
+                      {{ chosenBoat?.session?.cox?.lastName }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+
+              <ng-container
+                *ngIf="chosenTabIndex !== publicBoatsStatusEnum?.upcoming"
+              >
+                <div class="chosen-boat__details-item">
+                  <div class="chosen-boat__details-item-title">
+                    Ziel / Strecke:
+                  </div>
+                  <div class="chosen-boat__details-item-place-container">
+                    {{ chosenBoat?.session?.route }}
+                  </div>
+                </div>
+
+                <div class="chosen-boat__details-item">
+                  <div class="chosen-boat__details-item-title">Entfernung:</div>
+                  <div class="chosen-boat__details-item-place-container">
+                    {{ chosenBoat?.session?.distance }} km
+                  </div>
+                </div>
+                <div class="chosen-boat__details-container-footer">
+                  <button
+                    [class.disabled]="!chosenBoat"
+                    (click)="
+                      showSessionDisplay(publicSessionWindowEnum?.finishSession)
+                    "
+                    class="btn btn--home-type btn--success"
+                  >
+                    {{ publicLanguageGer?.finishSessionButton }}
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div class="chosen-boat__body">
+          <ng-container
+            *ngIf="chosenTabIndex === publicBoatsStatusEnum?.Available"
+          >
+            <div>
+              <div>
+                <button
+                  [class.disabled]="
+                    !chosenBoat ||
+                    trafficLightService?.terminalState ===
+                      publicTrafficLightEnum?.terminalRed
+                  "
+                  (click)="
+                    showSessionDisplay(publicSessionWindowEnum?.startSession)
+                  "
+                  class="btn btn--home-type btn--success"
+                >
+                  {{ publicLanguageGer?.startSessionButton }}
+                </button>
+              </div>
+              <div>
+                <button
+                  [class.disabled]="
+                    !chosenBoat ||
+                    trafficLightService?.terminalState ===
+                      publicTrafficLightEnum?.terminalRed
+                  "
+                  (click)="
+                    showSessionDisplay(
+                      publicSessionWindowEnum?.forgottenBoatSession
+                    )
+                  "
+                  class="btn btn--home-type btn--success-light"
+                >
+                  {{ publicLanguageGer?.forgottenBoatSession }}
+                </button>
+              </div>
+              <ng-container *ngIf="isUserAdmin">
+                <div>
+                  <button
+                    [class.disabled]="!chosenBoat"
+                    (click)="
+                      showSessionDisplay(
+                        publicSessionWindowEnum?.lockBoatSession
+                      )
+                    "
+                    class="btn btn--home-type btn--danger"
+                  >
+                    {{ publicLanguageGer?.lockBoatSessionButton }}
+                  </button>
+                </div>
+              </ng-container>
+
+              <div>
+                <button
+                  class="btn btn--external-session"
+                  (click)="
+                    showSessionDisplay(
+                      publicSessionWindowEnum?.externalBoatSession
+                    )
+                  "
+                >
+                  {{ publicLanguageGer?.wordAddExternalRowing }}
+                </button>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="chosenTabIndex === publicBoatsStatusEnum?.NOT_AVAILABLE"
+          >
+            <div>
+              <button
+                [class.disabled]="!chosenBoat"
+                (click)="
+                  showSessionDisplay(
+                    publicSessionWindowEnum?.editStartedBoatSession
+                  )
+                "
+                class="btn btn--edit"
+              >
+                {{ publicLanguageGer?.editSessionbuttonTitle }}
+              </button>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              chosenTabIndex === publicBoatsStatusEnum?.DAMAGED &&
+              chosenBoat?.lockStatus === publicLockStatusEnum?.locked &&
+              isUserAdmin
+            "
+          >
+            <div>
+              <div>
+                <button
+                  [class.disabled]="!chosenBoat"
+                  (click)="
+                    showSessionDisplay(
+                      publicSessionWindowEnum?.unlockBoatSession
+                    )
+                  "
+                  class="btn btn--home-type btn--danger"
+                >
+                  {{ publicLanguageGer?.unlockBoatSessionButton }}
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <ng-container
+          *ngIf="chosenTabIndex === publicBoatsStatusEnum?.NOT_AVAILABLE"
+        >
+          <div class="chosen-boat__footer">
+            <button
+              [class.disabled]="!chosenBoat"
+              (click)="
+                showSessionDisplay(publicSessionWindowEnum?.cancelSession)
+              "
+              class="btn btn--home-type btn--danger"
+            >
+              {{ publicLanguageGer?.cancelSessionButton }}
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="sessionDisplay">
+  <app-session-window
+    [display]="sessionDisplay"
+    [title]="sessionWindowTitle"
+    [lockStatus]="lockStatus"
+    [formFields]="sessionFormConfig"
+    [sessionWindowType]="sessionWindowType"
+    (closeSessionWinidowEvent)="cancelSessionWindow()"
+    (sessionWindowEvent)="sessionmiddleware($event)"
+    [choosenBoatData]="chosenBoat"
+  ></app-session-window>
+</ng-container>
+
+<ng-container *ngIf="boatClassWarrningDisplay">
+  <app-modal (closeModalEvent)="closeBoatClassWarrningModal()">
+    <div class="modal-header" header>
+      {{ publicLanguageGer?.wordBoatClassTitle }}
+    </div>
+    <div content>
+      <div>
+        {{ errorUser }}
+      </div>
+
+      <div>
+        {{ sessionDataStorage?.data?.competency }}
+
+        {{ competencyErrorText }}
+      </div>
+    </div>
+    <div footer>
+      <button class="btn close-button" (click)="closeBoatClassWarrningModal()">
+        {{ publicLanguageGer?.wordAbort }}
+      </button>
+      <button class="btn ok" (click)="confirmBoatClassWarrning()">
+        {{ publicLanguageGer?.wordAccepted }}
+      </button>
+    </div>
+  </app-modal>
+</ng-container>
+
+<ng-container *ngIf="statesService?.chosenStatisticsType">
+  <app-statistics></app-statistics>
+</ng-container>
+
+<app-message-box [data]="errorMessages"></app-message-box>

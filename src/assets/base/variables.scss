@@ -1,0 +1,61 @@
+/*variables*/
+
+//base paths
+// $image-path: "https://zhoricc3398.github.io/bog-archive/assets/";
+// $font-path: "https://zhoricc3398.github.io/bog-archive/assets/fonts/";
+$image-path: "/assets/";
+$font-path: "/assets/fonts/";
+
+//
+$font-names: (
+  medium: Roboto-Medium,
+  regular: Roboto-Regular,
+  bold: Roboto-Bold,
+);
+
+//
+$font-sizes: (
+  sm: 12px,
+  md: 14px,
+  lg: 16px,
+  xl: 32,
+);
+
+//
+$G-100-Lit-green: #7ac143;
+$Y-100-Lit-mandarine: #f6d276;
+$R-100-Lit-grapefruit: #ed6464;
+$Y-30-Lit-egg: #fdf2d7;
+$N-100-Lit-smoke: #dce3ea;
+$G-50-Lit-Grape: #f1f7e7;
+$T-100-Lit-Nocturne: #353830;
+$T-50-Lit-ash: #838383;
+
+$trafficGreen: #2AC14D;
+$trafficYellow: #e9df20;
+$trafficRed: #ff0000;
+
+//
+$def-space: 30px;
+$def-radius: 8px;
+$def-border-solid: 1px solid #eaeaea;
+
+$header-space: 120px;
+
+//
+$container-max-widths: (
+  sm: 575px,
+  md: 720px,
+  lg: 960px,
+  xl: 1170px,
+  xxl: 1336px,
+);
+
+//
+$def-transition: all 0.2s linear;
+
+//tabs
+$tab-content-top-space: 40px;
+
+//comments
+$commnets-thumbnail-size: 55px;

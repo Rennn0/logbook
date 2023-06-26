@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'sass:math';
+
+//
+@import "./assets/modules/normalize";
+
+@import "./assets/modules/date-time";
+
+//
+@import "./assets/base/variables";
+
+//
+@import "~bootstrap/scss/bootstrap.scss";
+
+//
+@import "./assets/tools/def-mixins";
+
+//
+@import "./assets/fonts/fonts";
+
+//
+@import "./assets/keyframes/keyframes";
+
+//
+@import "./assets/icons/icons";
+
+//
+@import "./assets/base/base";
+
+//
+@import "./assets/base/global";
+
+//tools
+@import "./assets/tools/tools";
+
+//pages
+@import "./assets/pages/page";
+
+//shared
+@import "./assets/shared/header";
+@import "./assets/shared/logo";
+@import "./assets/shared/boats-tab";
+@import "./assets/shared/buttons";
+@import "./assets/shared/form";
+@import "./assets/shared/boats-list";
+@import "./assets/shared/chosen-boat";
+@import "./assets/shared/auth";
+@import "./assets/shared/session-window";
+@import "./assets/shared/message-box";
+@import "./assets/shared/weather";
+@import "./assets/shared/statistics";
+@import "./assets/shared/table";
+@import "./assets/shared/healthcheck";
+@import "./assets/shared/spinner";
+@import "./assets/shared/modal";

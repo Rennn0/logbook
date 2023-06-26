@@ -1,0 +1,25 @@
+@mixin def-background($size: "contain", $position: "center center") {
+  background-repeat: no-repeat;
+  background-position: #{$position};
+  background-size: #{$size};
+}
+
+@mixin make-flex($content: "center") {
+  display: flex;
+  align-items: center;
+  justify-content: #{$content};
+}
+
+@mixin def-position($position: "0") {
+  left: #{$position};
+  right: #{$position};
+  bottom: #{$position};
+  top: #{$position};
+}
+
+@mixin make-ellipsis($width: "100px") {
+  max-width: #{$width};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

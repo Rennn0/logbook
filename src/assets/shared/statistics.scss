@@ -1,0 +1,156 @@
+.statistics {
+  //
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  background-color: #fff;
+
+  &__header {
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    background-color: #fff;
+    height: 70px;
+    border-bottom: 1px solid #caced2;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+    }
+
+    &-title {
+      font-size: 20px;
+      color: #2d418d;
+      margin-left: 20px;
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 15px;
+      background-image: url($image-path + "icons/drop-down-grey.svg");
+      padding-right: 25px;
+    }
+  }
+
+  &__body {
+    padding: 0 40px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100% - 70px);
+
+    &-header {
+      padding: 20px 0;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .boats-tab__search-fieldset {
+        margin-right: 40px;
+      }
+
+      &-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 40px;
+
+        &-thumbnail {
+          width: 50px;
+          height: 50px;
+          margin-right: 15px;
+          border-radius: 50%;
+          background-color: #58c5f021;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 40%;
+
+          &--date {
+            background-image: url($image-path + "icons/date.svg");
+          }
+
+          &--count {
+            background-image: url($image-path + "icons/count.svg");
+          }
+
+          &--allKilometer {
+            background-image: url($image-path + "icons/allKilometer.svg");
+          }
+        }
+
+        &-description {
+          &-title {
+            font-size: 14px;
+            color: #444444;
+            margin-bottom: 3px;
+          }
+          &-sub-title {
+            font-size: 17px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    &-table {
+    }
+  }
+}
+
+.header-statistics-navigation {
+  position: relative;
+  margin-left: 40px;
+
+  &__content {
+    display: none;
+    min-width: 305px;
+    position: absolute;
+    z-index: 1500;
+    left: 0;
+    top: 100%;
+    padding: 13px 0;
+    border-radius: 8px;
+    transform: translateY(10px);
+    background: #ffffff;
+    box-shadow: 0px 2px 12px 0px #00000021;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &__item {
+    cursor: pointer;
+    font-size: 16px;
+    color: #444444;
+    padding: 14px 18px;
+
+    &:hover {
+      color: #2d418d;
+      background-color: #e5eaef;
+    }
+  }
+}
+
+.statistics-indicator {
+  margin-right: 10px;
+  height: 21px;
+  background-color: #4974c5;
+}

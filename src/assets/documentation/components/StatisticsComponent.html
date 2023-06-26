@@ -1,0 +1,1986 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>booking-frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">booking-frontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  StatisticsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/statistics/statistics.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-statistics</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./statistics.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./statistics.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#APIUrlSegment" >APIUrlSegment</a>
+                            </li>
+                            <li>
+                                <a href="#chosenTypeIndex" >chosenTypeIndex</a>
+                            </li>
+                            <li>
+                                <a href="#filteredData" >filteredData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#functionalService" >functionalService</a>
+                            </li>
+                            <li>
+                                <a href="#pageInfo" >pageInfo</a>
+                            </li>
+                            <li>
+                                <a href="#publicLanguageGer" >publicLanguageGer</a>
+                            </li>
+                            <li>
+                                <a href="#publicStatisticsEnum" >publicStatisticsEnum</a>
+                            </li>
+                            <li>
+                                <a href="#publicStatisticsNavigation" >publicStatisticsNavigation</a>
+                            </li>
+                            <li>
+                                <a href="#responseData" >responseData</a>
+                            </li>
+                            <li>
+                                <a href="#searchInput" >searchInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#statesService" >statesService</a>
+                            </li>
+                            <li>
+                                <a href="#statisticsEvaluationPeriod" >statisticsEvaluationPeriod</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#toggleStatisticNavigation" >toggleStatisticNavigation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chooseAndOpenStatisticType" >chooseAndOpenStatisticType</a>
+                            </li>
+                            <li>
+                                <a href="#clickout" >clickout</a>
+                            </li>
+                            <li>
+                                <a href="#closeStatisticsPage" >closeStatisticsPage</a>
+                            </li>
+                            <li>
+                                <a href="#countResponseKilometers" >countResponseKilometers</a>
+                            </li>
+                            <li>
+                                <a href="#filterBoats" >filterBoats</a>
+                            </li>
+                            <li>
+                                <a href="#getChosenStatisticConfig" >getChosenStatisticConfig</a>
+                            </li>
+                            <li>
+                                <a href="#getData" >getData</a>
+                            </li>
+                            <li>
+                                <a href="#load" >load</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#splitterHighestClassOnly" >splitterHighestClassOnly</a>
+                            </li>
+                            <li>
+                                <a href="#toggleStatisticNavigationDisplay" >toggleStatisticNavigationDisplay</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#document:click" >document:click</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(statesService: <a href="../injectables/StatesService.html" target="_self">StatesService</a>, dataService: <a href="../injectables/DataService.html" target="_self">DataService</a>, functionalService: <a href="../injectables/FunctionalService.html" target="_self">FunctionalService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>statesService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StatesService.html" target="_self" >StatesService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>functionalService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FunctionalService.html" target="_self" >FunctionalService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section>
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="document:click"></a>
+                    <span class="name">
+                        <span ><b>document:click</b></span>
+                        <a href="#document:click"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>document:click(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chooseAndOpenStatisticType"></a>
+                    <span class="name">
+                        <span ><b>chooseAndOpenStatisticType</b></span>
+                        <a href="#chooseAndOpenStatisticType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>chooseAndOpenStatisticType(type: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="191"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:191</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickout"></a>
+                    <span class="name">
+                        <span ><b>clickout</b></span>
+                        <a href="#clickout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickout(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeStatisticsPage"></a>
+                    <span class="name">
+                        <span ><b>closeStatisticsPage</b></span>
+                        <a href="#closeStatisticsPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeStatisticsPage()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:107</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="countResponseKilometers"></a>
+                    <span class="name">
+                        <span ><b>countResponseKilometers</b></span>
+                        <a href="#countResponseKilometers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>countResponseKilometers(data: any[], key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:183</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterBoats"></a>
+                    <span class="name">
+                        <span ><b>filterBoats</b></span>
+                        <a href="#filterBoats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filterBoats()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="203"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:203</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getChosenStatisticConfig"></a>
+                    <span class="name">
+                        <span ><b>getChosenStatisticConfig</b></span>
+                        <a href="#getChosenStatisticConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getChosenStatisticConfig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getData"></a>
+                    <span class="name">
+                        <span ><b>getData</b></span>
+                        <a href="#getData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="load"></a>
+                    <span class="name">
+                        <span ><b>load</b></span>
+                        <a href="#load"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>load()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:58</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="262"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:262</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="splitterHighestClassOnly"></a>
+                    <span class="name">
+                        <span ><b>splitterHighestClassOnly</b></span>
+                        <a href="#splitterHighestClassOnly"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>splitterHighestClassOnly(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mainSplit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="244"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:244</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>text</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mainSplit</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string | undefined</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleStatisticNavigationDisplay"></a>
+                    <span class="name">
+                        <span ><b>toggleStatisticNavigationDisplay</b></span>
+                        <a href="#toggleStatisticNavigationDisplay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleStatisticNavigationDisplay()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="179"
+                            class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:179</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="APIUrlSegment"></a>
+                    <span class="name">
+                        <span ><b>APIUrlSegment</b></span>
+                        <a href="#APIUrlSegment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chosenTypeIndex"></a>
+                    <span class="name">
+                        <span ><b>chosenTypeIndex</b></span>
+                        <a href="#chosenTypeIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredData"></a>
+                    <span class="name">
+                        <span ><b>filteredData</b></span>
+                        <a href="#filteredData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="functionalService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>functionalService</b></span>
+                        <a href="#functionalService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/FunctionalService.html" target="_self" >FunctionalService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageInfo"></a>
+                    <span class="name">
+                        <span ><b>pageInfo</b></span>
+                        <a href="#pageInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publicLanguageGer"></a>
+                    <span class="name">
+                        <span ><b>publicLanguageGer</b></span>
+                        <a href="#publicLanguageGer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>wordsGerm</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publicStatisticsEnum"></a>
+                    <span class="name">
+                        <span ><b>publicStatisticsEnum</b></span>
+                        <a href="#publicStatisticsEnum"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>StatisticsEnum</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publicStatisticsNavigation"></a>
+                    <span class="name">
+                        <span ><b>publicStatisticsNavigation</b></span>
+                        <a href="#publicStatisticsNavigation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>StatisticsNavigation</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="responseData"></a>
+                    <span class="name">
+                        <span ><b>responseData</b></span>
+                        <a href="#responseData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchInput"></a>
+                    <span class="name">
+                        <span ><b>searchInput</b></span>
+                        <a href="#searchInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statesService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>statesService</b></span>
+                        <a href="#statesService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/StatesService.html" target="_self" >StatesService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statisticsEvaluationPeriod"></a>
+                    <span class="name">
+                        <span ><b>statisticsEvaluationPeriod</b></span>
+                        <a href="#statisticsEvaluationPeriod"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleStatisticNavigation"></a>
+                    <span class="name">
+                        <span ><b>toggleStatisticNavigation</b></span>
+                        <a href="#toggleStatisticNavigation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/statistics/statistics.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl } from &#x27;@angular/forms&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { StatisticsEnum } from &#x27;src/app/core/enums/statistics.enum&#x27;;
+import { wordsGerm } from &#x27;src/app/core/mocks/language.mock&#x27;;
+import { StatisticsNavigation } from &#x27;src/app/core/mocks/statistics.mock&#x27;;
+import { DataService } from &#x27;src/app/core/services/data/data.service&#x27;;
+import { FunctionalService } from &#x27;src/app/core/services/functions/functional.service&#x27;;
+import { StatesService } from &#x27;src/app/core/services/states/states.service&#x27;;
+import { environment } from &#x27;src/environments/environment&#x27;;
+
+@Component({
+  selector: &#x27;app-statistics&#x27;,
+  templateUrl: &#x27;./statistics.component.html&#x27;,
+  styleUrls: [&#x27;./statistics.component.scss&#x27;],
+})
+export class StatisticsComponent implements OnInit, OnDestroy {
+  responseData: any;
+  pageInfo: any;
+
+  filteredData: any[] &#x3D; [];
+  searchInput: FormControl &#x3D; new FormControl();
+
+  subscription: Subscription &#x3D; new Subscription();
+
+  APIUrlSegment: string | undefined;
+
+  publicStatisticsEnum &#x3D; StatisticsEnum;
+
+  publicStatisticsNavigation &#x3D; StatisticsNavigation;
+
+  toggleStatisticNavigation: boolean &#x3D; false;
+
+  chosenTypeIndex: number &#x3D; 0;
+
+  statisticsEvaluationPeriod: string &#x3D; &#x27;&#x27;;
+
+  //
+  publicLanguageGer &#x3D; wordsGerm;
+
+  //
+  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
+  clickout(event: any) {
+    if (!event.target.classList.contains(&#x27;out-box--click&#x27;)) {
+      this.toggleStatisticNavigation &#x3D; false;
+    }
+  }
+  constructor(
+    public statesService: StatesService,
+    private dataService: DataService,
+    public functionalService: FunctionalService
+  ) { }
+
+  ngOnInit(): void {
+    this.load();
+  }
+
+  load(): void {
+    this.getChosenStatisticConfig();
+
+    this.getData();
+  }
+
+  getChosenStatisticConfig(): void {
+    let chosenTypeIndex &#x3D; StatisticsNavigation.findIndex(
+      (x: any) &#x3D;&gt; x.value &#x3D;&#x3D;&#x3D; this.statesService.chosenStatisticsType
+    );
+
+    if (chosenTypeIndex !&#x3D;&#x3D; -1) {
+      this.pageInfo &#x3D; StatisticsNavigation[chosenTypeIndex];
+
+      if (
+        StatisticsNavigation[chosenTypeIndex].value &#x3D;&#x3D;&#x3D;
+        StatisticsEnum.KilometerStatistics
+      ) {
+        this.APIUrlSegment &#x3D; &#x27;statistics/users&#x27;;
+      }
+
+
+      if (
+        StatisticsNavigation[chosenTypeIndex].value &#x3D;&#x3D;&#x3D;
+        StatisticsEnum.CommerzbankStatistics
+      ) {
+        this.APIUrlSegment &#x3D; &#x27;statistics/users/commerzbank&#x27;;
+      }
+
+      if (
+        StatisticsNavigation[chosenTypeIndex].value &#x3D;&#x3D;&#x3D;
+        StatisticsEnum.VenezianerStatistics
+      ) {
+        this.APIUrlSegment &#x3D; &#x27;statistics/boats/venice&#x27;;
+      }
+
+      if (
+        StatisticsNavigation[chosenTypeIndex].value !&#x3D;&#x3D;
+        StatisticsEnum.KilometerStatistics &amp;&amp; StatisticsNavigation[chosenTypeIndex].value !&#x3D;&#x3D; StatisticsEnum.CommerzbankStatistics
+      ) {
+        this.APIUrlSegment &#x3D; &#x27;statistics/boats&#x27;;
+      }
+
+
+      this.chosenTypeIndex &#x3D; chosenTypeIndex;
+      console.log(this.APIUrlSegment, this.chosenTypeIndex, this.statesService.chosenStatisticsType);
+    }
+  }
+
+  closeStatisticsPage(): void {
+    this.statesService.chosenStatisticsType &#x3D; null;
+  }
+
+  getData(): void {
+    if (!this.APIUrlSegment) {
+      // console.log(&#x27;APIUrlSegment - is False - undefined&#x27;);
+      return;
+    }
+
+    const url &#x3D; &#x60;${environment.API}${this.APIUrlSegment}&#x60;;
+
+    this.subscription.add(
+      this.dataService.getData(url).subscribe(
+        (Response) &#x3D;&gt; {
+          // console.log(Response);
+          //according to type of statistics we have different response from API
+          if (this.statesService.chosenStatisticsType &#x3D;&#x3D;&#x3D; StatisticsEnum.CommerzbankStatistics) {
+            this.responseData &#x3D; Response.body;
+          } else {
+            this.responseData &#x3D; Response.body.data;
+          }
+
+          // console.log(Response.body, this.responseData, this.chosenTypeIndex &#x3D;&#x3D;&#x3D; StatisticsEnum.CommerzbankStatistics, this.chosenTypeIndex, StatisticsEnum.CommerzbankStatistics);
+          // return
+
+          this.responseData.stats.forEach((x: any) &#x3D;&gt; {
+            x.modifyName &#x3D; [];
+            x.userModifyName &#x3D; this.splitterHighestClassOnly(x.user, &#x27;(&#x27;);
+            x.boatModifyName &#x3D; this.splitterHighestClassOnly(x.boat, &#x27;(&#x27;);
+            if (x.cox) {
+              x.coxModifyName &#x3D; this.splitterHighestClassOnly(x.cox, &#x27;(&#x27;);
+            }
+            if (x.crew) {
+              x.crew.forEach((y: any) &#x3D;&gt; {
+                x.modifyName.push(this.splitterHighestClassOnly(y, &#x27;(&#x27;));
+              });
+            }
+          });
+
+          //modify date for date harmonize dd.mm.yyyy
+          this.statisticsEvaluationPeriod &#x3D; &#x60;${this.responseData.header.date.split(&#x27; &#x27;)[0].replaceAll(&#x27;-&#x27;, &#x27;.&#x27;)} - ${this.responseData.header.date.split(&#x27; &#x27;)[2]}&#x60;;
+          if (
+            StatisticsNavigation[this.chosenTypeIndex].value &#x3D;&#x3D;&#x3D;
+            StatisticsEnum.KilometerStatistics || StatisticsNavigation[this.chosenTypeIndex].value &#x3D;&#x3D;&#x3D; StatisticsEnum.CommerzbankStatistics
+          ) {
+            this.responseData.stats.sort((a: any, b: any) &#x3D;&gt; b.km - a.km);
+            this.responseData.header.distance &#x3D; this.countResponseKilometers(
+              this.responseData.stats,
+              &#x27;km&#x27;
+            );
+          }
+
+          if (
+            StatisticsNavigation[this.chosenTypeIndex].value !&#x3D;&#x3D;
+            StatisticsEnum.KilometerStatistics
+          ) {
+            this.responseData.stats.sort(
+              (a: any, b: any) &#x3D;&gt; b.startDate - a.startDate
+            );
+          }
+
+          //load default data
+          this.filterBoats();
+        },
+        (error) &#x3D;&gt; {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  toggleStatisticNavigationDisplay(): void {
+    this.toggleStatisticNavigation &#x3D; !this.toggleStatisticNavigation;
+  }
+
+  countResponseKilometers(data: any[], key: string): number {
+    let countedDistance &#x3D; 0;
+    data.forEach((x) &#x3D;&gt; {
+      countedDistance +&#x3D; x[key];
+    });
+    return countedDistance;
+  }
+
+  chooseAndOpenStatisticType(type: any): void {
+    this.responseData &#x3D; undefined;
+    this.filteredData &#x3D; [];
+    this.searchInput.setValue(&#x27;&#x27;);
+    this.pageInfo &#x3D; undefined;
+    this.statesService.chosenStatisticsType &#x3D; type;
+    this.APIUrlSegment &#x3D; undefined;
+    this.chosenTypeIndex &#x3D; 0;
+    this.load();
+  }
+
+  // found boats in responseData
+  filterBoats(): void {
+    //on load return all items
+    if (!this.searchInput.value) {
+      this.filteredData &#x3D; this.responseData.stats;
+      if (
+        StatisticsNavigation[this.chosenTypeIndex].value &#x3D;&#x3D;&#x3D;
+        StatisticsEnum.logbookSingleBoat
+      ) {
+        //
+        this.responseData.header.distance &#x3D; this.countResponseKilometers(
+          this.filteredData,
+          &#x27;distance&#x27;
+        );
+
+        this.responseData.header.sessionsCount &#x3D; this.filteredData.length;
+      }
+      return;
+    }
+
+    //
+    this.filteredData &#x3D; [];
+
+    this.responseData.header.distance &#x3D; 0;
+
+    this.responseData.stats.forEach((responseItem: any) &#x3D;&gt; {
+      if (
+        responseItem.boat
+          .toLowerCase()
+          .includes(this.searchInput.value.toLowerCase())
+      ) {
+        //
+        this.filteredData.push(responseItem);
+
+        this.responseData.header.distance +&#x3D; responseItem.distance;
+
+        this.responseData.header.sessionsCount &#x3D; this.filteredData.length;
+      }
+    });
+  }
+
+  //
+  splitterHighestClassOnly(
+    text: string,
+    mainSplit: string
+  ): string | undefined {
+    if (!text) {
+      // console.log(&#x27;text for split is undefined&#x27;);
+      return;
+    }
+    let getElementSplitArray &#x3D; text.split(&#x27; &#x27;);
+    let getElementSplit &#x3D; text.split(&#x60;${mainSplit}&#x60;);
+    let fullName &#x3D; getElementSplit[0];
+    let getHighestClassArray &#x3D;
+      getElementSplitArray[getElementSplitArray.length - 1].split(&#x27;/&#x27;);
+    let getHighestClassOnly &#x3D;
+      getHighestClassArray[getHighestClassArray.length - 1].split(&#x27;)&#x27;)[0];
+    return &#x60;${fullName} (${getHighestClassOnly})&#x60;;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;statistics&quot;&gt;
+  &lt;div class&#x3D;&quot;statistics__header&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;statistics__header-left out-box--click&quot;
+      (click)&#x3D;&quot;toggleStatisticNavigationDisplay()&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;statistics__header-left-nav&quot;&gt;
+        &lt;button class&#x3D;&quot;btn btn--statistics-nav out-box--click&quot;&gt;&lt;/button&gt;
+        &lt;div
+          class&#x3D;&quot;header-statistics-navigation__content&quot;
+          [class.active]&#x3D;&quot;toggleStatisticNavigation&quot;
+        &gt;
+          &lt;ng-container *ngFor&#x3D;&quot;let item of publicStatisticsNavigation&quot;&gt;
+            &lt;div
+              (click)&#x3D;&quot;chooseAndOpenStatisticType(item?.value)&quot;
+              class&#x3D;&quot;header-statistics-navigation__item out-box--click&quot;
+            &gt;
+              {{ item?.label }}
+            &lt;/div&gt;
+          &lt;/ng-container&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;statistics__header-title out-box--click&quot;&gt;
+        {{ pageInfo?.label }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;statistics__header-right&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn--close&quot; (click)&#x3D;&quot;closeStatisticsPage()&quot;&gt;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;statistics__body&quot;&gt;
+    &lt;div class&#x3D;&quot;statistics__body-header&quot;&gt;
+      &lt;ng-container
+        *ngIf&#x3D;&quot;
+          statesService.chosenStatisticsType &#x3D;&#x3D;&#x3D;
+          publicStatisticsEnum?.logbookSingleBoat
+        &quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;boats-tab__search-fieldset boats-tab__search-fieldset--search d-flex&quot;
+        &gt;
+          &lt;input
+            class&#x3D;&quot;form-fieldset&quot;
+            type&#x3D;&quot;text&quot;
+            name&#x3D;&quot;search&quot;
+            (input)&#x3D;&quot;filterBoats()&quot;
+            placeholder&#x3D;&quot;Bootsnamen eingeben&quot;
+            title&#x3D;&quot;Bootsnamen eingeben&quot;
+            [formControl]&#x3D;&quot;searchInput&quot;
+          /&gt;
+          &lt;button class&#x3D;&quot;btn btn--search&quot;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;responseData?.header?.date&quot;&gt;
+        &lt;div class&#x3D;&quot;statistics__body-header-item&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--date&quot;
+          &gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;statistics__body-header-item-description&quot;&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-title&quot;&gt;
+              Auswertezeitraum:
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-sub-title&quot;&gt;
+              {{ statisticsEvaluationPeriod }}
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;responseData?.header?.sessionsCount&quot;&gt;
+        &lt;div class&#x3D;&quot;statistics__body-header-item&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--count&quot;
+          &gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;statistics__body-header-item-description&quot;&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-title&quot;&gt;
+              Anzahl Fahrten:
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-sub-title&quot;&gt;
+              {{ responseData?.header?.sessionsCount }}
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;responseData?.header?.distance&quot;&gt;
+        &lt;div class&#x3D;&quot;statistics__body-header-item&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--allKilometer&quot;
+          &gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;statistics__body-header-item-description&quot;&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-title&quot;&gt;
+              Gesamtkilometer:
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;statistics__body-header-item-description-sub-title&quot;&gt;
+              {{ responseData?.header?.distance }} km
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;statistics__body-table&quot;&gt;
+      &lt;table class&#x3D;&quot;table&quot;&gt;
+        &lt;thead&gt;
+          &lt;th&gt;No.&lt;/th&gt;
+          &lt;ng-container
+            *ngIf&#x3D;&quot;
+              statesService.chosenStatisticsType &#x3D;&#x3D;&#x3D;
+                publicStatisticsEnum?.KilometerStatistics ||
+              statesService?.chosenStatisticsType &#x3D;&#x3D;&#x3D;
+                publicStatisticsEnum?.CommerzbankStatistics
+            &quot;
+          &gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Kilometer&lt;/th&gt;
+            &lt;th&gt;Fahrten&lt;/th&gt;
+            &lt;th&gt;km/Fahrt&lt;/th&gt;
+          &lt;/ng-container&gt;
+
+          &lt;ng-container
+            *ngIf&#x3D;&quot;
+              statesService.chosenStatisticsType !&#x3D;&#x3D;
+                publicStatisticsEnum?.KilometerStatistics &amp;&amp;
+              statesService.chosenStatisticsType !&#x3D;&#x3D;
+                publicStatisticsEnum?.CommerzbankStatistics
+            &quot;
+          &gt;
+            &lt;th&gt;Datum&lt;/th&gt;
+            &lt;th&gt;Boot&lt;/th&gt;
+            &lt;th&gt;Steuermann&lt;/th&gt;
+            &lt;th&gt;Gäste&lt;/th&gt;
+            &lt;th&gt;Mannschaft&lt;/th&gt;
+            &lt;th&gt;Abfahrt&lt;/th&gt;
+            &lt;th&gt;Ankunft&lt;/th&gt;
+            &lt;th&gt;Ziel&lt;/th&gt;
+            &lt;th&gt;Kilometer&lt;/th&gt;
+          &lt;/ng-container&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;ng-container *ngFor&#x3D;&quot;let item of filteredData; let i &#x3D; index&quot;&gt;
+            &lt;tr&gt;
+              &lt;td&gt;{{ i + 1 }}&lt;/td&gt;
+              &lt;ng-container
+                *ngIf&#x3D;&quot;
+                  statesService?.chosenStatisticsType &#x3D;&#x3D;&#x3D;
+                    publicStatisticsEnum?.KilometerStatistics ||
+                    statesService?.chosenStatisticsType &#x3D;&#x3D;&#x3D;
+                      publicStatisticsEnum?.CommerzbankStatistics;
+                  else defaultStats
+                &quot;
+              &gt;
+                &lt;td&gt;{{ item?.userModifyName }}&lt;/td&gt;
+                &lt;td class&#x3D;&quot;statistics-indicator-container&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-flex-container&quot;&gt;
+                    &lt;div
+                      class&#x3D;&quot;statistics-indicator&quot;
+                      [style.width.px]&#x3D;&quot;item?.km&quot;
+                    &gt;&lt;/div&gt;
+                    {{ item?.km }} km
+                  &lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td&gt;{{ item?.sessions }}&lt;/td&gt;
+                &lt;td&gt;{{ item?.averageKM }} km&lt;/td&gt;
+              &lt;/ng-container&gt;
+              &lt;ng-template #defaultStats&gt;
+                &lt;td&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;item?.startDate&quot;&gt;
+                    {{
+                      functionalService.returnDateFromUTC(item?.startDate, true)
+                        | date: &quot;dd.MM.yyyy&quot;
+                    }}
+                  &lt;/ng-container&gt;
+                &lt;/td&gt;
+                &lt;td&gt;{{ item?.boatModifyName }}&lt;/td&gt;
+                &lt;td&gt;{{ item?.coxModifyName }}&lt;/td&gt;
+                &lt;td&gt;
+                  &lt;ng-container *ngFor&#x3D;&quot;let element of item?.guests&quot;&gt;
+                    &lt;span class&#x3D;&quot;text-spacer&quot;&gt;{{ element }}&lt;/span&gt;
+                  &lt;/ng-container&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                  &lt;ng-container
+                    *ngFor&#x3D;&quot;let element of item?.crew; let i &#x3D; index&quot;
+                  &gt;
+                    &lt;span
+                      class&#x3D;&quot;text-spacer&quot;
+                      [ngClass]&#x3D;&quot;{
+                        &#x27;text-spacer--bold&#x27;: item?.helper &#x3D;&#x3D;&#x3D; element
+                      }&quot;
+                      &gt;{{ item?.modifyName[i] }}&lt;/span
+                    &gt;
+                  &lt;/ng-container&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;item?.startDate&quot;&gt;
+                    {{
+                      functionalService.returnDateFromUTC(item?.startDate, true)
+                        | date: &quot;HH:mm&quot;
+                    }}
+                  &lt;/ng-container&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;item?.endDate&quot;&gt;
+                    {{
+                      functionalService.returnDateFromUTC(item?.endDate, true)
+                        | date: &quot;HH:mm&quot;
+                    }}
+                  &lt;/ng-container&gt;
+                &lt;/td&gt;
+                &lt;td&gt;{{ item?.route }}&lt;/td&gt;
+                &lt;td&gt;{{ item?.distance }} km&lt;/td&gt;
+              &lt;/ng-template&gt;
+            &lt;/tr&gt;
+          &lt;/ng-container&gt;
+          &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;!filteredData?.length&quot;&gt;
+            &lt;tr&gt;
+              ....
+            &lt;/tr&gt;
+          &lt;/ng-container&gt; --&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./statistics.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="statistics">  <div class="statistics__header">    <div      class="statistics__header-left out-box--click"      (click)="toggleStatisticNavigationDisplay()"    >      <div class="statistics__header-left-nav">        <button class="btn btn--statistics-nav out-box--click"></button>        <div          class="header-statistics-navigation__content"          [class.active]="toggleStatisticNavigation"        >          <ng-container *ngFor="let item of publicStatisticsNavigation">            <div              (click)="chooseAndOpenStatisticType(item?.value)"              class="header-statistics-navigation__item out-box--click"            >              {{ item?.label }}            </div>          </ng-container>        </div>      </div>      <div class="statistics__header-title out-box--click">        {{ pageInfo?.label }}      </div>    </div>    <div class="statistics__header-right">      <button class="btn btn--close" (click)="closeStatisticsPage()"></button>    </div>  </div>  <div class="statistics__body">    <div class="statistics__body-header">      <ng-container        *ngIf="          statesService.chosenStatisticsType ===          publicStatisticsEnum?.logbookSingleBoat        "      >        <div          class="boats-tab__search-fieldset boats-tab__search-fieldset--search d-flex"        >          <input            class="form-fieldset"            type="text"            name="search"            (input)="filterBoats()"            placeholder="Bootsnamen eingeben"            title="Bootsnamen eingeben"            [formControl]="searchInput"          />          <button class="btn btn--search"></button>        </div>      </ng-container>      <ng-container *ngIf="responseData?.header?.date">        <div class="statistics__body-header-item">          <div            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--date"          ></div>          <div class="statistics__body-header-item-description">            <div class="statistics__body-header-item-description-title">              Auswertezeitraum:            </div>            <div class="statistics__body-header-item-description-sub-title">              {{ statisticsEvaluationPeriod }}            </div>          </div>        </div>      </ng-container>      <ng-container *ngIf="responseData?.header?.sessionsCount">        <div class="statistics__body-header-item">          <div            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--count"          ></div>          <div class="statistics__body-header-item-description">            <div class="statistics__body-header-item-description-title">              Anzahl Fahrten:            </div>            <div class="statistics__body-header-item-description-sub-title">              {{ responseData?.header?.sessionsCount }}            </div>          </div>        </div>      </ng-container>      <ng-container *ngIf="responseData?.header?.distance">        <div class="statistics__body-header-item">          <div            class="statistics__body-header-item-thumbnail statistics__body-header-item-thumbnail--allKilometer"          ></div>          <div class="statistics__body-header-item-description">            <div class="statistics__body-header-item-description-title">              Gesamtkilometer:            </div>            <div class="statistics__body-header-item-description-sub-title">              {{ responseData?.header?.distance }} km            </div>          </div>        </div>      </ng-container>    </div>    <div class="statistics__body-table">      <table class="table">        <thead>          <th>No.</th>          <ng-container            *ngIf="              statesService.chosenStatisticsType ===                publicStatisticsEnum?.KilometerStatistics ||              statesService?.chosenStatisticsType ===                publicStatisticsEnum?.CommerzbankStatistics            "          >            <th>Name</th>            <th>Kilometer</th>            <th>Fahrten</th>            <th>km/Fahrt</th>          </ng-container>          <ng-container            *ngIf="              statesService.chosenStatisticsType !==                publicStatisticsEnum?.KilometerStatistics &&              statesService.chosenStatisticsType !==                publicStatisticsEnum?.CommerzbankStatistics            "          >            <th>Datum</th>            <th>Boot</th>            <th>Steuermann</th>            <th>Gäste</th>            <th>Mannschaft</th>            <th>Abfahrt</th>            <th>Ankunft</th>            <th>Ziel</th>            <th>Kilometer</th>          </ng-container>        </thead>        <tbody>          <ng-container *ngFor="let item of filteredData; let i = index">            <tr>              <td>{{ i + 1 }}</td>              <ng-container                *ngIf="                  statesService?.chosenStatisticsType ===                    publicStatisticsEnum?.KilometerStatistics ||                    statesService?.chosenStatisticsType ===                      publicStatisticsEnum?.CommerzbankStatistics;                  else defaultStats                "              >                <td>{{ item?.userModifyName }}</td>                <td class="statistics-indicator-container">                  <div class="d-flex-container">                    <div                      class="statistics-indicator"                      [style.width.px]="item?.km"                    ></div>                    {{ item?.km }} km                  </div>                </td>                <td>{{ item?.sessions }}</td>                <td>{{ item?.averageKM }} km</td>              </ng-container>              <ng-template #defaultStats>                <td>                  <ng-container *ngIf="item?.startDate">                    {{                      functionalService.returnDateFromUTC(item?.startDate, true)                        | date: "dd.MM.yyyy"                    }}                  </ng-container>                </td>                <td>{{ item?.boatModifyName }}</td>                <td>{{ item?.coxModifyName }}</td>                <td>                  <ng-container *ngFor="let element of item?.guests">                    <span class="text-spacer">{{ element }}</span>                  </ng-container>                </td>                <td>                  <ng-container                    *ngFor="let element of item?.crew; let i = index"                  >                    <span                      class="text-spacer"                      [ngClass]="{                        \'text-spacer--bold\': item?.helper === element                      }"                      >{{ item?.modifyName[i] }}</span                    >                  </ng-container>                </td>                <td>                  <ng-container *ngIf="item?.startDate">                    {{                      functionalService.returnDateFromUTC(item?.startDate, true)                        | date: "HH:mm"                    }}                  </ng-container>                </td>                <td>                  <ng-container *ngIf="item?.endDate">                    {{                      functionalService.returnDateFromUTC(item?.endDate, true)                        | date: "HH:mm"                    }}                  </ng-container>                </td>                <td>{{ item?.route }}</td>                <td>{{ item?.distance }} km</td>              </ng-template>            </tr>          </ng-container>          <!-- <ng-container *ngIf="!filteredData?.length">            <tr>              ....            </tr>          </ng-container> -->        </tbody>      </table>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconCloseComponent', 'selector': 'app-icon-close'},{'name': 'IconSignoutComponent', 'selector': 'app-icon-signout'},{'name': 'MessageBoxComponent', 'selector': 'app-message-box'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'SessionWindowComponent', 'selector': 'app-session-window'},{'name': 'SigninComponent', 'selector': 'app-signin'},{'name': 'StatisticsComponent', 'selector': 'app-statistics'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StatisticsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StatisticsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

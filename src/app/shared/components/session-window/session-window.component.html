@@ -1,0 +1,913 @@
+<div class="session-window" [class.active]="display">
+  <div class="session-window__backworld" (click)="closeSessionWinidow()"></div>
+  <div class="session-window__container">
+    <div class="session-window__container-headers">
+      <div class="session-window__title">{{ title }}</div>
+
+      <div class="session-window__aside">
+        <button class="btn modal-btn--close" (click)="closeSessionWinidow()">
+          <app-icon-close class="icon icon--md"></app-icon-close>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngIf="isLoaded">
+      <div class="session-window__body">
+        <ng-container *ngIf="bookedHours?.length">
+          <div
+            class="session-window__notifications session-window__notifications--danger"
+          >
+            <span> Das Boot ist heute ab </span>
+            <ng-container *ngFor="let item of bookedHours">
+              <span>
+                {{
+                  functionalService.returnDateFromUTC(item, true)
+                    | date : "HH:mm"
+                }}
+              </span>
+            </ng-container>
+            <span> gebucht! </span>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            sessionWindowType === publicSessionWindowEnum?.cancelSession ||
+            sessionWindowType === publicSessionWindowEnum?.lockBoatSession ||
+            sessionWindowType === publicSessionWindowEnum?.unlockBoatSession
+          "
+        >
+          <div class="session-window__body-title">
+            {{ publicLanguageGer?.chosenBoatTitle }}
+          </div>
+          <div class="session-window__body-boat-title">
+            {{ choosenBoatData?.name }}
+          </div>
+        </ng-container>
+        <form
+          class="form"
+          [formGroup]="sessionForm"
+          [class.disabled-type-1]="
+            sessionWindowType === publicSessionWindowEnum.finishSession
+          "
+        >
+          <div class="form__fieldset-placeholder">
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'select_boat_type'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordBoatCategoryType
+                }}</label>
+
+                <div
+                  class="form__dropdown out-box--click"
+                  [class.active]="
+                    isDropDownDisplay === publicDropDowns?.categoryTypeDropDown
+                  "
+                  (click)="
+                    toggleDropwDown(publicDropDowns?.categoryTypeDropDown)
+                  "
+                >
+                  <div
+                    class="form__dropdown-item form__dropdown-item--selected out-box--click"
+                  >
+                    {{ selectedCategoryType }}
+                  </div>
+                  <div class="form__dropdown-item-container">
+                    <ng-container *ngFor="let item of categoryTypes">
+                      <div
+                        class="form__dropdown-item out-box--click"
+                        (click)="selectCategoryType(item)"
+                      >
+                        {{ item?.name }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form__fieldset-placeholder">
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'select_boat_category'
+                ) !== -1 &&
+                formFields[
+                  functionalService.returnIndexInArray(
+                    formFields,
+                    'select_boat_category'
+                  )
+                ]?.display
+              "
+            >
+              <div class="form__fieldset">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordBoatCategory
+                }}</label>
+
+                <div
+                  class="form__dropdown out-box--click"
+                  [class.active]="
+                    isDropDownDisplay === publicDropDowns?.categoryDropDown
+                  "
+                  (click)="toggleDropwDown(publicDropDowns?.categoryDropDown)"
+                >
+                  <div
+                    class="form__dropdown-item form__dropdown-item--selected out-box--click"
+                  >
+                    {{ selectedCategories }}
+                  </div>
+                  <div class="form__dropdown-item-container">
+                    <ng-container *ngFor="let item of categories">
+                      <div
+                        class="form__dropdown-item out-box--click"
+                        (click)="selectCategory(item)"
+                      >
+                        {{ item?.name }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="form__fieldset-placeholder form__fieldset-placeholder--flex"
+          >
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'boat_name'
+                ) !== -1
+              "
+            >
+              <div
+                class="form__fieldset to-disabled"
+                [class.disabled]="
+                  !formFields[
+                    functionalService.returnIndexInArray(
+                      formFields,
+                      'boat_name'
+                    )
+                  ]?.isEditable
+                "
+              >
+                <label class="form__label">{{
+                  publicLanguageGer?.wordBoat
+                }}</label>
+                <input
+                  type="text"
+                  class="form__input"
+                  name="boat"
+                  title="boat"
+                  formControlName="boat_name"
+                />
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(formFields, 'Lfd') !== -1
+              "
+            >
+              <div class="form__fieldset to-disabled disabled">
+                <label class="form__label">Lfd. Nr</label>
+                <input
+                  type="text"
+                  class="form__input"
+                  name="boat"
+                  title="boat"
+                  formControlName="Lfd"
+                />
+              </div>
+            </ng-container>
+          </div>
+
+          <ng-container
+            *ngIf="
+              functionalService?.returnIndexInArray(formFields, 'team') !== -1
+            "
+          >
+            <div class="form__fieldset form__fieldset--splitter"></div>
+
+            <div
+              id="seatsContainer"
+              class="form__fieldset-placeholder to-disabled form__fieldset-placeholder--flex-wrap-2"
+            >
+              <ng-container
+                formArrayName="team"
+                *ngFor="let item of formData.controls; let i = index"
+              >
+                <div
+                  class="form__fieldset form__fieldset--search-holder"
+                  [ngClass]="{
+                    disabled: isCrewDisabled,
+                    active: activeSuggestIndex === i
+                  }"
+                >
+                  <ng-container *ngIf="i === 0">
+                    <label class="form__label">{{
+                      publicLanguageGer?.wordTeam
+                    }}</label>
+                  </ng-container>
+                  <div
+                    class="form__input-container form__input-container--numbered"
+                    [attr.data-index]="i + 1"
+                  >
+                    <input
+                      formControlName="{{ i }}"
+                      type="text"
+                      class="form__input"
+                      name="boat"
+                      title="boat"
+                      autocomplete="off"
+                      (keyup)="searchUserAccordingToFirstName($event, i)"
+                    />
+                  </div>
+
+                  <ng-container *ngIf="foundUserList?.length">
+                    <div class="form__suggest">
+                      <ng-container *ngFor="let item of foundUserList">
+                        <div (click)="setCrewMemberValue(item, i)">
+                          <ng-container *ngIf="item?.firstName; else guestUser">
+                            <span>
+                              {{ item?.firstName }} {{ item?.lastName }}
+                            </span>
+                          </ng-container>
+                          <ng-template #guestUser>
+                            <span>
+                              {{ item?.name }}
+                            </span>
+                          </ng-template>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <div
+            class="form__fieldset-placeholder form__fieldset-placeholder--flex"
+          >
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(formFields, 'route') !==
+                -1
+              "
+            >
+              <div class="form__fieldset">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordDestinationRoute
+                }}</label>
+
+                <div
+                  class="form__dropdown out-box--click"
+                  [class.active]="
+                    isDropDownDisplay === publicDropDowns?.routeDropDown
+                  "
+                  (click)="toggleDropwDown(publicDropDowns?.routeDropDown)"
+                >
+                  <div
+                    class="form__dropdown-item form__dropdown-item--selected out-box--click"
+                  >
+                    {{ selectedRoute }}
+                  </div>
+                  <div class="form__dropdown-item-container">
+                    <ng-container *ngFor="let item of routeList">
+                      <div
+                        class="form__dropdown-item out-box--click"
+                        (click)="setSelectedRoute(item)"
+                      >
+                        {{ item?.name }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <!-- 
+              <select
+                class="form__input"
+                formControlName="route"
+                (input)="setDistance($event)"
+              >
+                <option selected hidden [ngValue]="routeList[0]?.value">
+                  {{ routeList[0]?.name }}
+                </option>
+
+                <ng-container *ngFor="let item of routeList">
+                  <option [ngValue]="item?.value">{{ item?.name }}</option>
+                </ng-container>
+              </select> -->
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'distance'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset form__fieldset-in-container--md">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordDistance
+                }}</label>
+                <input
+                  type="text"
+                  class="form__input"
+                  name="distance"
+                  title="distance"
+                  formControlName="distance"
+                />
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="form__fieldset-placeholder form__fieldset-placeholder--flex"
+          >
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'routeText'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordDestinationRoute
+                }}</label>
+                <input
+                  type="text"
+                  class="form__input"
+                  name="boat"
+                  title="boat"
+                  formControlName="routeText"
+                />
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'routeTextDistance'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset form__fieldset-in-container--md">
+                <label class="form__label">{{
+                  publicLanguageGer?.wordDistance
+                }}</label>
+                <input
+                  type="text"
+                  class="form__input"
+                  name="routeTextDistance"
+                  title="routeTextDistance"
+                  formControlName="routeTextDistance"
+                />
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="form__fieldset-placeholder form__fieldset-placeholder--flex"
+          >
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'startDate'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset">
+                <div class="form__fieldset-in">
+                  <div
+                    [class.disabled]="
+                      sessionWindowType !==
+                        publicSessionWindowEnum?.forgottenBoatSession &&
+                      sessionWindowType !==
+                        publicSessionWindowEnum?.externalBoatSession
+                    "
+                    class="form__fieldset-in-container form__fieldset-in-container--md"
+                  >
+                    <label class="form__label">
+                      {{ publicLanguageGer?.wordDate }}
+                    </label>
+                    <!-- <input
+                      type="date"
+                      class="form__input form__input--hidden"
+                      name="date"
+                      title="boat"
+                      formControlName="startDate"
+                    />
+
+                    <div class="form__input">{{ startDate }}</div> -->
+
+                    <!---->
+                    <div class="time-picker">
+                      <div class="form__input" [owlDateTimeTrigger]="dt5">
+                        {{ startDate }}
+                      </div>
+                      <input
+                        type="text"
+                        class="form__input form__input--hidden"
+                        [owlDateTimeTrigger]="dt5"
+                        [owlDateTime]="dt5"
+                        (dateTimeInput)="setStartDateDisplay($event)"
+                        [min]="minTime"
+                        [max]="maxTime"
+                        formControlName="startDate"
+                      />
+                      <owl-date-time
+                        [pickerType]="'calendar'"
+                        #dt5
+                      ></owl-date-time>
+                    </div>
+                  </div>
+
+                  <div
+                    class="form__fieldset-in-container form__fieldset-in-container--clock"
+                  >
+                    <label class="form__label">{{
+                      publicLanguageGer?.wordDeparture
+                    }}</label>
+                    <div class="time-picker">
+                      <div
+                        class="form__input"
+                        (click)="setDatePickerLocalization()"
+                        [owlDateTimeTrigger]="dt4"
+                      >
+                        {{ timeDisplay }}
+                      </div>
+                      <input
+                        type="text"
+                        class="form__input form__input--hidden"
+                        [owlDateTimeTrigger]="dt4"
+                        [owlDateTime]="dt4"
+                        (dateTimeInput)="setTimeDisplay($event)"
+                        [min]="minTime"
+                        [max]="maxTime"
+                        formControlName="startClock"
+                      />
+                      <owl-date-time
+                        [pickerType]="'timer'"
+                        [hour12Timer]="false"
+                        #dt4
+                      ></owl-date-time>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'startEndDate'
+                ) !== -1
+              "
+            >
+              <div class="form__fieldset">
+                <label class="form__label"
+                  >{{ publicLanguageGer?.wordArrivalDate }}
+                </label>
+
+                <div class="time-picker">
+                  <div
+                    class="form__input"
+                    (click)="setDatePickerLocalization()"
+                    [owlDateTimeTrigger]="dt"
+                  >
+                    {{ timeEndDisplay }}
+                  </div>
+
+                  <input
+                    class="form__input form__input--hidden"
+                    (dateTimeInput)="setEndTimeDisplay($event)"
+                    [min]="minEndTime"
+                    [max]="maxEndTime"
+                    [owlDateTimeTrigger]="dt"
+                    [owlDateTime]="dt"
+                    formControlName="startEndDate"
+                  />
+                  <owl-date-time #dt></owl-date-time>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form__fieldset-placeholder">
+            <ng-container
+              *ngIf="
+                isCox &&
+                sessionWindowType != publicSessionWindowEnum.externalBoatSession
+              "
+            >
+              <div
+                class="form__fieldset to-disabled"
+                [class.form__fieldset--select-pseudo-value]="
+                  sessionWindowType === publicSessionWindowEnum.finishSession
+                "
+              >
+                <label class="form__label">
+                  {{ publicLanguageGer?.wordHelmsman }}
+                </label>
+                <div class="dropdown">
+                  <div
+                    class="dropdown__selected"
+                    (click)="toggleCoxDropDownDisplay()"
+                  >
+                    {{ selectedCoxFullName }}
+                  </div>
+
+                  <ng-container *ngIf="isCoxDropDownDisplayActive">
+                    <div class="dropdown__options-container active">
+                      <div class="dropdown__filter">
+                        <input
+                          type="text"
+                          name="coxFullName"
+                          (input)="filterCoxArray($event)"
+                        />
+                      </div>
+                      <div class="dropdown__option-placeholder">
+                        <ng-container *ngFor="let item of filteredCox">
+                          <div
+                            class="dropdown__option"
+                            (click)="
+                              setCoxInFormControl({
+                                id: item?.id,
+                                name: item?.name,
+                                lastName: item?.lastName
+                              });
+                              toggleCoxDropDownDisplay()
+                            "
+                          >
+                            {{ item?.name }} {{ item?.lastName }}
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                isCox &&
+                sessionWindowType ===
+                  publicSessionWindowEnum.externalBoatSession
+              "
+            >
+              <!--external Cox-->
+              <div
+                class="form__fieldset form__fieldset--search-holder active"
+                [class.active]="
+                  activeSuggestIndex ===
+                  publicformElementsIndex?.externalSessionCoxInputIndex
+                "
+              >
+                <label class="form__label">
+                  {{ publicLanguageGer?.wordHelmsman }}
+                </label>
+                <div class="form__input-container">
+                  <input
+                    formControlName="externalCox"
+                    type="text"
+                    class="form__input"
+                    name="boat"
+                    title="boat"
+                    autocomplete="off"
+                    (input)="
+                      filterCoxArray(
+                        $event,
+                        publicformElementsIndex?.externalSessionCoxInputIndex
+                      )
+                    "
+                  />
+                </div>
+
+                <ng-container
+                  *ngIf="
+                    filteredCox?.length &&
+                    activeSuggestIndex ===
+                      publicformElementsIndex?.externalSessionCoxInputIndex
+                  "
+                >
+                  <div class="form__suggest">
+                    <ng-container *ngFor="let item of filteredCox">
+                      <div (click)="setExternalCox(item)">
+                        <ng-container *ngIf="item?.name; else externalUser">
+                          <span> {{ item?.name }} {{ item?.lastName }} </span>
+                        </ng-container>
+                        <ng-template #externalUser>
+                          <span>
+                            {{ item?.name }}
+                          </span>
+                        </ng-template>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="form__fieldset-placeholder form__fieldset-placeholder--flex"
+          >
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(formFields, 'helper') !==
+                -1
+              "
+            >
+              <div
+                class="form__fieldset to-disabled"
+                [class.disabled]="!chairmanValues.length"
+              >
+                <div class="form__label">
+                  {{ publicLanguageGer?.wordChairman }}
+                </div>
+                <div
+                  class="form__dropdown out-box--click"
+                  [class.active]="
+                    isDropDownDisplay === publicDropDowns?.obmannDropDown
+                  "
+                  (click)="toggleDropwDown(publicDropDowns?.obmannDropDown)"
+                >
+                  <div
+                    class="form__dropdown-item form__dropdown-item--selected out-box--click"
+                  >
+                    {{ selectedObman }}
+                  </div>
+                  <div class="form__dropdown-item-container">
+                    <ng-container *ngFor="let item of chairmanValues">
+                      <div
+                        class="form__dropdown-item out-box--click"
+                        (click)="setObman(item)"
+                      >
+                        {{ item?.name }} {{ item?.lastName }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'freeHelper'
+                ) !== -1
+              "
+            >
+              <!--external helper-->
+              <div
+                class="form__fieldset form__fieldset--search-holder active"
+                [class.active]="
+                  activeSuggestIndex ===
+                  publicformElementsIndex?.externalSessionObmanInputIndex
+                "
+              >
+                <label class="form__label">
+                  {{ publicLanguageGer?.wordChairman }}
+                </label>
+                <div class="form__input-container">
+                  <input
+                    formControlName="freeHelper"
+                    type="text"
+                    class="form__input"
+                    name="boat"
+                    title="boat"
+                    autocomplete="off"
+                    (keyup)="
+                      searchUserAccordingToFirstName(
+                        $event,
+                        publicformElementsIndex?.externalSessionObmanInputIndex
+                      )
+                    "
+                  />
+                </div>
+
+                <ng-container
+                  *ngIf="
+                    foundUserList?.length &&
+                    activeSuggestIndex ===
+                      publicformElementsIndex?.externalSessionObmanInputIndex
+                  "
+                >
+                  <div class="form__suggest">
+                    <ng-container *ngFor="let item of foundUserList">
+                      <div (click)="setExternalObman(item)">
+                        <ng-container *ngIf="item?.firstName; else guestUser">
+                          <span>
+                            {{ item?.firstName }} {{ item?.lastName }}
+                          </span>
+                        </ng-container>
+                        <ng-template #guestUser>
+                          <span>
+                            {{ item?.name }}
+                          </span>
+                        </ng-template>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                functionalService?.returnIndexInArray(
+                  formFields,
+                  'rideType'
+                ) !== -1
+              "
+            >
+              <div
+                class="form__fieldset form__fieldset--shadow-select to-disabled"
+              >
+                <label class="form__label">
+                  {{ publicLanguageGer?.wordRideType }}
+                </label>
+                <select
+                  id="FahrtartLabel"
+                  class="form__input"
+                  formControlName="rideType"
+                >
+                  <ng-container *ngFor="let item of rideTypeValues">
+                    <option
+                      [ngValue]="item?.value"
+                      [selected]="item?.value === 'TRAINING'"
+                    >
+                      {{ item?.name }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form__fieldset form__fieldset--splitter"></div>
+          <ng-container
+            *ngIf="
+              functionalService?.returnIndexInArray(formFields, 'comment') !==
+              -1
+            "
+          >
+            <div class="form__fieldset">
+              <label class="form__label">
+                {{ publicLanguageGer?.wordRemarks }}
+              </label>
+              <textarea
+                class="form__input"
+                formControlName="comment"
+              ></textarea>
+            </div>
+          </ng-container>
+        </form>
+      </div>
+
+      <div class="session-window__footer">
+        <div class="session-window__footer-left">
+          <!-- <button class="btn">Bootsschaden melden</button> -->
+        </div>
+
+        <div class="session-window__footer-right">
+          <button class="btn btn--signIn-type" (click)="closeSessionWinidow()">
+            {{ publicLanguageGer?.wordAbort }}
+          </button>
+
+          <ng-container
+            *ngIf="sessionWindowType === publicSessionWindowEnum?.startSession"
+          >
+            <button
+              class="btn btn--signIn-type btn--success"
+              (click)="startSession(publicSessionWindowEnum?.startSession)"
+            >
+              {{ publicLanguageGer?.wordStartRide }}
+            </button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              sessionWindowType ===
+              publicSessionWindowEnum?.forgottenBoatSession
+            "
+          >
+            <button
+              class="btn btn--signIn-type btn--success-light"
+              (click)="
+                forgottenSession(publicSessionWindowEnum?.forgottenBoatSession)
+              "
+            >
+              {{ publicLanguageGer?.forgottenBoatSession }}
+            </button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="sessionWindowType === publicSessionWindowEnum?.finishSession"
+          >
+            <button
+              class="btn btn--signIn-type btn--success"
+              (click)="finishSession(publicSessionWindowEnum?.finishSession)"
+            >
+              Fahrt beenden
+            </button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              sessionWindowType ===
+              publicSessionWindowEnum?.editStartedBoatSession
+            "
+          >
+            <button
+              class="btn btn--signIn-type btn--success"
+              (click)="
+                editSession(publicSessionWindowEnum?.editStartedBoatSession)
+              "
+            >
+              {{ publicLanguageGer?.wordEditSession }}
+            </button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="sessionWindowType === publicSessionWindowEnum?.cancelSession"
+          >
+            <button
+              class="btn btn--signIn-type btn--danger"
+              (click)="cancelSession(publicSessionWindowEnum?.cancelSession)"
+            >
+              Fahrt abbrechen
+            </button>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              sessionWindowType === publicSessionWindowEnum?.lockBoatSession
+            "
+          >
+            <button
+              class="btn btn--signIn-type btn--danger"
+              (click)="
+                toggleLockBoatSession(publicSessionWindowEnum?.lockBoatSession)
+              "
+            >
+              {{ publicLanguageGer?.lockBoatSessionButton }}
+            </button>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              sessionWindowType === publicSessionWindowEnum?.unlockBoatSession
+            "
+          >
+            <button
+              class="btn btn--signIn-type btn--danger"
+              (click)="
+                toggleLockBoatSession(
+                  publicSessionWindowEnum?.unlockBoatSession
+                )
+              "
+            >
+              {{ publicLanguageGer?.unlockBoatSessionButton }}
+            </button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              sessionWindowType === publicSessionWindowEnum?.externalBoatSession
+            "
+          >
+            <button
+              class="btn btn--signIn-type btn--success"
+              (click)="
+                saveExternalRowing(publicSessionWindowEnum?.externalBoatSession)
+              "
+            >
+              {{ publicLanguageGer?.wordSaveExternalRowingButton }}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<app-message-box [data]="errorMessages"></app-message-box>

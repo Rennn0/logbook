@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  height: $header-space;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #2d418d;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+  }
+
+  &__aside {
+    display: flex;
+    align-items: center;
+  }
+}

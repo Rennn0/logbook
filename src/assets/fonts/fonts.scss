@@ -1,0 +1,11 @@
+/*fonts*/
+@mixin register-font-family($name) {
+  @font-face {
+    font-family: $name;
+    src: url($font_path + $name + ".ttf") format("truetype"), local($name);
+  }
+}
+
+@include register-font-family(map-get($font-names, "regular"));
+@include register-font-family(map-get($font-names, "medium"));
+@include register-font-family(map-get($font-names, "bold"));

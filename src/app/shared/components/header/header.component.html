@@ -1,0 +1,237 @@
+<div class="header">
+  <div class="header__left">
+    <a href="javascript:void(0)" [routerLink]="'home'">
+      <div class="logo"></div>
+    </a>
+    <div class="header-statistics-navigation">
+      <button
+        class="btn btn--drop-down out-box--click"
+        (click)="toggleStatisticNavigationDisplay()"
+      >
+        {{ publicwordsMaster?.wordStatistics }}
+      </button>
+      <div
+        class="header-statistics-navigation__content"
+        [class.active]="toggleStatisticNavigation"
+      >
+        <ng-container *ngFor="let item of publicStatisticsNavigation">
+          <div
+            (click)="chooseAndOpenStatisticType(item?.value)"
+            class="header-statistics-navigation__item out-box--click"
+          >
+            {{ item?.label }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="header__aside">
+    <div class="weather">
+      <div class="weather__body">
+        <div class="weather__block weather__block--light">
+          <div class="weather__block--placeholder">
+            <div
+              class="weather__light"
+              [ngClass]="{
+                'weather__light--red':
+                  trafficLightService?.terminalState ===
+                  publicTrafficLightEnum?.terminalRed,
+                'weather__light--yellow':
+                  trafficLightService?.terminalState ===
+                  publicTrafficLightEnum?.terminalYellow,
+                'weather__light--green':
+                  trafficLightService?.terminalState ===
+                  publicTrafficLightEnum?.terminalGreen
+              }"
+            ></div>
+            <div class="weather__header-title">
+              {{ trafficLightService?.title }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="weather__block"
+          [ngClass]="{
+            'weather__block--red':
+              trafficLightService?.wassertempValueIs ===
+              publicTrafficLightIndicatorsStates?.wassertempValueRed,
+            'weather__block--yellow':
+              trafficLightService?.wassertempValueIs ===
+              publicTrafficLightIndicatorsStates?.wassertempValueYellow,
+            'weather__block--green':
+              trafficLightService?.wassertempValueIs ===
+              publicTrafficLightIndicatorsStates?.wassertempValueGreen
+          }"
+        >
+          <div class="weather__block--placeholder">
+            <div
+              class="weather__block-icon weather__block-icon--water-temperature"
+            ></div>
+            <div class="weather__block-conditions">
+              {{ trafficLightService?.wassertempValue }} °C
+            </div>
+            <div class="weather__block-title">
+              {{ publicwordsMaster?.waterTemperatureTitle }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="weather__block"
+          [ngClass]="{
+            'weather__block--red':
+              trafficLightService?.luftTempValueIs ===
+              publicTrafficLightIndicatorsStates?.luftTempValueRed,
+            'weather__block--green':
+              trafficLightService?.luftTempValueIs ===
+              publicTrafficLightIndicatorsStates?.luftTempValueGreen
+          }"
+        >
+          <div class="weather__block--placeholder">
+            <div
+              class="weather__block-icon weather__block-icon--thermometer"
+            ></div>
+            <div class="weather__block-conditions">
+              {{ trafficLightService?.luftTempValue }} °C
+            </div>
+            <div class="weather__block-title">
+              {{ publicwordsMaster?.airTemperatureTitle }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="weather__block"
+          [ngClass]="{
+            'weather__block--yellow':
+              trafficLightService?.abflussValueIs ===
+              publicTrafficLightIndicatorsStates?.abflussValueYellow,
+            'weather__block--green':
+              trafficLightService?.abflussValueIs ===
+              publicTrafficLightIndicatorsStates?.abflussValueGreen,
+            'weather__block--red':
+              trafficLightService?.abflussValueIs ===
+              publicTrafficLightIndicatorsStates?.abflussValueRed
+          }"
+        >
+          <div class="weather__block--placeholder">
+            <div class="weather__block-icon weather__block-icon--DRAIN"></div>
+            <div class="weather__block-conditions">
+              {{ trafficLightService?.abflussValue }} m³/s
+            </div>
+            <div class="weather__block-title">
+              {{ publicwordsMaster?.drainTitle }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="weather__block"
+          [ngClass]="{
+            'weather__block--red':
+              trafficLightService?.wasserstandValueIs ===
+              publicTrafficLightIndicatorsStates?.wasserstandValueRed,
+            'weather__block--green':
+              trafficLightService?.wasserstandValueIs ===
+              publicTrafficLightIndicatorsStates?.wasserstandValueGreen
+          }"
+        >
+          <div class="weather__block--placeholder">
+            <div class="weather__block-icon weather__block-icon--lvl"></div>
+            <div class="weather__block-conditions">
+              {{ trafficLightService?.wasserstandValue }} cm
+            </div>
+            <div class="weather__block-title">
+              {{ publicwordsMaster?.waterLevelTitle }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="weather__block"
+          [ngClass]="{
+            'weather__block--red':
+              trafficLightService?.windSpeedValueIs ===
+              publicTrafficLightIndicatorsStates?.windSpeedValueRed,
+            'weather__block--yellow':
+              trafficLightService?.windSpeedValueIs ===
+              publicTrafficLightIndicatorsStates?.windSpeedValueYellow,
+            'weather__block--green':
+              trafficLightService?.windSpeedValueIs ===
+              publicTrafficLightIndicatorsStates?.windSpeedValueGreen
+          }"
+        >
+          <div class="weather__block--placeholder">
+            <div class="weather__block-icon weather__block-icon--wind"></div>
+            <div class="weather__block-conditions">
+              {{ trafficLightService?.windSpeedValue }} km/h
+            </div>
+            <div class="weather__block-title">
+              {{ publicwordsMaster?.windSpeedTitle }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="isUserAdmin">
+      <div class="traffic-light-manual" [class.active]="trafficManualDisplay">
+        <button class="btn btn--more" (click)="toggleTrafficManual()"></button>
+        <div class="traffic-light-manual__drop-down">
+          <div class="traffic-light-manual__drop-down-container">
+            <div class="traffic-light-manual__title">
+              {{ publicwordsMaster?.setTrafficLightTitle }}
+            </div>
+            <div
+              class="traffic-light-manual__drop-down-item"
+              (click)="setTrafficManual(publicTrafficLightEnum?.terminalGreen)"
+              [class.active]="
+                publicTrafficLightEnum?.terminalGreen === selectedTrafficLight
+              "
+            >
+              <div class="traffic-light-manual__drop-down-item-selector"></div>
+              {{ publicwordsMaster?.greenTitle }}
+            </div>
+            <div
+              class="traffic-light-manual__drop-down-item"
+              (click)="setTrafficManual(publicTrafficLightEnum?.terminalYellow)"
+              [class.active]="
+                publicTrafficLightEnum?.terminalYellow === selectedTrafficLight
+              "
+            >
+              <div class="traffic-light-manual__drop-down-item-selector"></div>
+              {{ publicwordsMaster?.yellowTitle }}
+            </div>
+            <div
+              class="traffic-light-manual__drop-down-item"
+              (click)="setTrafficManual(publicTrafficLightEnum?.terminalRed)"
+              [class.active]="
+                publicTrafficLightEnum?.terminalRed === selectedTrafficLight
+              "
+            >
+              <div class="traffic-light-manual__drop-down-item-selector"></div>
+              {{ publicwordsMaster?.redTitle }}
+            </div>
+            <div
+              class="traffic-light-manual__drop-down-item"
+              [class.active]="
+                publicTrafficLightEnum?.automatically === selectedTrafficLight
+              "
+              (click)="setTrafficManual(publicTrafficLightEnum?.automatically)"
+            >
+              <div class="traffic-light-manual__drop-down-item-selector"></div>
+              {{ publicwordsMaster?.automaticallyTitle }}
+            </div>
+            <button
+              class="btn btn--traffic-light-ok"
+              (click)="saveTrafficData()"
+            >
+              {{ publicwordsMaster?.saveAndExitTite }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- <ng-container *ngIf="storeService?.isUserSignIn">
+      <button class="btn btn--danger btn--signout" (click)="singout()">
+        <span class="icon icon--md icon--signout">
+          <app-icon-signout></app-icon-signout>
+        </span></button
+    ></ng-container> -->
+  </div>
+</div>
