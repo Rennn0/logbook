@@ -4,19 +4,22 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config src/proxy.conf.json",
-    "build": "ng build",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; ng build",
     "watch": "ng build --watch --configuration development",
-    "ng serve host": "ng serve --host 0.0.0.0 --proxy-config src/proxy.conf.json",
+    "ng serve host": "ng serve ",
     "test": "ng test",
     "compodoc": "npx compodoc -p tsconfig.doc.json"
   },
   "private": true,
   "dependencies": {
+    "16": "^0.0.2",
     "@angular/animations": "~12.2.0",
+    "@angular/cdk": "~7.3.7",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
     "@angular/forms": "~12.2.0",
+    "@angular/material": "^7.3.7",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
@@ -31,6 +34,7 @@
     "socket.io-client": "^4.5.2",
     "sweetalert2": "^11.4.0",
     "tslib": "^2.3.0",
+    "webpack": "^5.88.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

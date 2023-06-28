@@ -16,6 +16,10 @@ import {
   OWL_DATE_TIME_LOCALE,
 } from 'ng-pick-datetime';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import {
+  PlanCourseComponent,
+  FilterBoatsPipe,
+} from './components/plan-course/plan-course.component';
 
 const components = [
   HeaderComponent,
@@ -24,6 +28,8 @@ const components = [
   SessionWindowComponent,
   MessageBoxComponent,
   StatisticsComponent,
+  PlanCourseComponent,
+  FilterBoatsPipe,
 ];
 
 const modules = [
@@ -42,4 +48,4 @@ const modules = [
   imports: [CommonModule, modules],
   exports: [components, modules],
 })
-export class SharedModule { }
+export class SharedModule {}

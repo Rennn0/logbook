@@ -11,7 +11,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { StatisticsComponent } from './shared/components/statistics/statistics.component';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -27,4 +26,4 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   // { provide: StatisticsComponent, useValue: {} }
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

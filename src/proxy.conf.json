@@ -1,8 +1,8 @@
 {
-    "/api/*": {
-        "target": "https://dev.frg-germania.de/",
-        "secure": false,
-        "changeOrigin": true,
-        "logLevel": "debug"
-    }
+  "/api/*": {
+    "target": "https://fahrtenbuch.frg-germania.de/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
 }

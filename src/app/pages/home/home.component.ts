@@ -9,7 +9,10 @@ import {
   formControlNames,
   formControlTypes,
 } from 'src/app/core/enums/form_control_types.enum';
-import { dropDowns, SessionWindowEnum } from 'src/app/core/enums/session_window.enum';
+import {
+  dropDowns,
+  SessionWindowEnum,
+} from 'src/app/core/enums/session_window.enum';
 import { trafficLightEnum } from 'src/app/core/enums/traffic_light.enum';
 import { formFieldsObjectInterface } from 'src/app/core/interfaces/formFieldsObject.interface';
 import { sessionEventTypeDataInterface } from 'src/app/core/interfaces/session-window.interface';
@@ -21,8 +24,10 @@ import { TrafficLightService } from 'src/app/core/services/traffic-light/traffic
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment-timezone';
 import { StatesService } from 'src/app/core/services/states/states.service';
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 import { StatusCodes } from 'src/app/core/enums/base.enum';
+import { MatDialog } from '@angular/material';
+import { PlanCourseComponent } from 'src/app/shared/components/plan-course/plan-course.component';
 
 @Component({
   selector: 'app-home',
@@ -150,8 +155,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   //start session window fields config
   externalRowingConfig: formFieldsObjectInterface[] = [
-    { formControlName: 'select_boat_type', controlType: formControlTypes.formControl },
-    { formControlName: 'select_boat_category', controlType: formControlTypes.formControl, display: false, },
+    {
+      formControlName: 'select_boat_type',
+      controlType: formControlTypes.formControl,
+    },
+    {
+      formControlName: 'select_boat_category',
+      controlType: formControlTypes.formControl,
+      display: false,
+    },
   ];
 
   isDropDownDisplay: any;
@@ -217,8 +229,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     public functionalService: FunctionalService,
     private storeService: StoreService,
     public trafficLightService: TrafficLightService,
-    public statesService: StatesService,
-  ) { }
+    public statesService: StatesService
+  ) {}
+
+  displayPlanCourse: boolean = false;
+
+  showPlanCourse() {
+    this.displayPlanCourse = !this.displayPlanCourse;
+  }
+
+  getFilteredData() {
+    return this.filteredData;
+  }
 
   ngOnInit(): void {
     // console.log('init', this.publicLanguageGer);
@@ -266,8 +288,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   });
     // });
 
-
-
     // console.log(this.storeService.userData);
   }
 
@@ -281,11 +301,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.responseDataKeys = [];
 
-    this.isDataDateFilterModue = false
-
+    this.isDataDateFilterModue = false;
 
     if (this.storeService.userData === undefined) {
-      return
+      return;
     }
 
     //clear sync function interval to stop it
@@ -321,7 +340,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       )
     );
-
   }
 
   //getting upcoming data from API
@@ -345,7 +363,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         (Response) => {
           // console.log(Response, '-----');
           if (Response.body) {
-
             let bookings = [...Response.body.bookings];
             let dateSortedArray: any[] = [];
 
@@ -370,8 +387,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
                   //   moment(this.functionalService.returnDateFromUTC(x.date, true)).format('yyyy-MM-DD') === moment(this.functionalService.returnDateFromUTC(dateSortedArray[0].date, true)).format('yyyy-MM-DD')
                   // );
-                  return moment(this.functionalService.returnDateFromUTC(x.date, true)).format('yyyy-MM-DD') === moment(this.functionalService.returnDateFromUTC(dateSortedArray[0].date, true)).format('yyyy-MM-DD');
-                })
+                  return (
+                    moment(
+                      this.functionalService.returnDateFromUTC(x.date, true)
+                    ).format('yyyy-MM-DD') ===
+                    moment(
+                      this.functionalService.returnDateFromUTC(
+                        dateSortedArray[0].date,
+                        true
+                      )
+                    ).format('yyyy-MM-DD')
+                  );
+                });
 
                 // console.log(bookingsIndex, 'bookingsIndex - თუ ვიპოვე პირველი ელემენტის შესაბამის ელემენტი ვწერ მას dateSortedArray, და ვბრუნდები თავიდან');
                 if (bookingsIndex !== -1) {
@@ -381,7 +408,14 @@ export class HomeComponent implements OnInit, OnDestroy {
                   dataDateSort();
                 } else {
                   this.responseData.push(dateSortedArray);
-                  this.responseDataKeys.push(moment(this.functionalService.returnDateFromUTC(dateSortedArray[0].date, true)).format('yyyy-MM-DD'));
+                  this.responseDataKeys.push(
+                    moment(
+                      this.functionalService.returnDateFromUTC(
+                        dateSortedArray[0].date,
+                        true
+                      )
+                    ).format('yyyy-MM-DD')
+                  );
                   dateSortedArray = [];
                   // console.log(dateSortedArray, bookings, 'მორჩა ერთი წრე ძებნის, გადავდივართ მომდევნო წრეზე, სუფთავდება dateSortedArray')
                   dataDateSort();
@@ -389,12 +423,19 @@ export class HomeComponent implements OnInit, OnDestroy {
               } else {
                 if (dateSortedArray.length) {
                   this.responseData.push(dateSortedArray);
-                  this.responseDataKeys.push(moment(this.functionalService.returnDateFromUTC(dateSortedArray[0].date, true)).format('yyyy-MM-DD'));
+                  this.responseDataKeys.push(
+                    moment(
+                      this.functionalService.returnDateFromUTC(
+                        dateSortedArray[0].date,
+                        true
+                      )
+                    ).format('yyyy-MM-DD')
+                  );
                   dateSortedArray = [];
                 }
                 // console.log('sorting done - ');
               }
-            }
+            };
 
             dataDateSort();
 
@@ -446,7 +487,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       this.sessionWindowTitle = wordsMaster.wordForgotten;
     }
-
 
     if (sessionWindowType === SessionWindowEnum.finishSession) {
       this.sessionFormConfig = this.finishSessionFieldsConfig;
@@ -507,15 +547,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   cancelSessionWindow(): void {
     this.sessionDisplay = false;
     this.externalRowingConfig = [
-      { formControlName: 'select_boat_type', controlType: formControlTypes.formControl },
-      { formControlName: 'select_boat_category', controlType: formControlTypes.formControl, display: false, },
-    ]
+      {
+        formControlName: 'select_boat_type',
+        controlType: formControlTypes.formControl,
+      },
+      {
+        formControlName: 'select_boat_category',
+        controlType: formControlTypes.formControl,
+        display: false,
+      },
+    ];
     this.chosenBoat = undefined;
   }
 
   // so we have one session window, and its need some middlewear to determain which way go
   sessionmiddleware(data: sessionEventTypeDataInterface): void {
-
     if (data.sessionType === SessionWindowEnum.startSession) {
       console.log('startSession', data);
       this.startSession(data);
@@ -587,24 +633,34 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
 
           if (error.error.reason) {
-            let errorText = error.error.reason
+            let errorText = error.error.reason;
 
-            if (error.error.type === StatusCodes.SESSION_WRONG_PERFORMANCE_CLASS) {
+            if (
+              error.error.type === StatusCodes.SESSION_WRONG_PERFORMANCE_CLASS
+            ) {
               console.log(error, 'SESSION_WRONG_PERFORMANCE_CLASS');
               this.errorUser = error.error.reason;
 
               /** check if boat competency is P and user have different comptency */
-              let indexCompetency = this.sessionDataStorage?.data?.competency.indexOf('P');
+              let indexCompetency =
+                this.sessionDataStorage?.data?.competency.indexOf('P');
 
               if (indexCompetency !== -1) {
-                errorText = this.publicLanguageGer.wordBoatCategoryAndUserNotMatch;
-                this.competencyErrorText = this.publicLanguageGer.wordBoatCategoryAndUserNotMatch;
+                errorText =
+                  this.publicLanguageGer.wordBoatCategoryAndUserNotMatch;
+                this.competencyErrorText =
+                  this.publicLanguageGer.wordBoatCategoryAndUserNotMatch;
               } else {
                 errorText = this.publicLanguageGer.wordBoatClassContent;
-                this.competencyErrorText = this.publicLanguageGer.wordBoatClassContent;
+                this.competencyErrorText =
+                  this.publicLanguageGer.wordBoatClassContent;
               }
 
-              console.log(this.sessionDataStorage, this.sessionDataStorage.competency, indexCompetency);
+              console.log(
+                this.sessionDataStorage,
+                this.sessionDataStorage.competency,
+                indexCompetency
+              );
 
               this.openBoatClassWarrningModal();
             }
@@ -751,7 +807,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
-  //change boat list by tab index - Tabs - BoatsStatusEnum 
+  //change boat list by tab index - Tabs - BoatsStatusEnum
   setBoatsByStatus(status: string, index: any): void {
     //stop sync function
     clearInterval(this.statesService.updateInterval);
@@ -791,8 +847,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   choseDateFilterBoat(responseDataIndex: number, inArrayIndex: number): void {
     this.chosenBoat = this.filteredData[responseDataIndex][inArrayIndex].boat;
     this.chosenBoat.session = {};
-    this.chosenBoat.session.crew = this.filteredData[responseDataIndex][inArrayIndex].crew;
-    this.chosenBoat.session.guests = this.filteredData[responseDataIndex][inArrayIndex].guests;
+    this.chosenBoat.session.crew =
+      this.filteredData[responseDataIndex][inArrayIndex].crew;
+    this.chosenBoat.session.guests =
+      this.filteredData[responseDataIndex][inArrayIndex].guests;
     this.chosenBoat.instigator = `${this.filteredData[responseDataIndex][inArrayIndex].instigator.firstName} ${this.filteredData[responseDataIndex][inArrayIndex].instigator.lastName}`;
     if (this.chosenBoat) {
       this.chosenBoatStartDate = moment(
@@ -811,7 +869,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   // found boats in responseData
-  filterBoats(value: string, isDateFilterType?: boolean, filterByKeys?: any): void {
+  filterBoats(
+    value: string,
+    isDateFilterType?: boolean,
+    filterByKeys?: any
+  ): void {
     // console.log(value, filterByKeys);
 
     if (!filterByKeys) {
@@ -848,9 +910,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             .toLowerCase()
             .includes(value.toLowerCase());
         } else {
-          return s[filterByKeys]
-            .toLowerCase()
-            .includes(value.toLowerCase());
+          return s[filterByKeys].toLowerCase().includes(value.toLowerCase());
         }
       });
 
@@ -881,7 +941,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isDropDownDisplay = index;
   }
 
-  // synchronization of logbook app to the backend, this function sets the listener to API, and if in the back side will change data this function will change the app state 
+  // synchronization of logbook app to the backend, this function sets the listener to API, and if in the back side will change data this function will change the app state
   loadUpdates(): void {
     //create and modify date to send local time, after this backend will send back data according to this local time, if somthing was changed on this local time period
     let localDate = moment(new Date());
@@ -889,85 +949,112 @@ export class HomeComponent implements OnInit, OnDestroy {
     let dateFormatedUTC = this.functionalService.returnDateToUTC(
       date.format('yyyy-MM-DDTHH:mm:ss')
     );
-    let dateGMT = this.functionalService.returnDateFromUTC(dateFormatedUTC, true);
+    let dateGMT = this.functionalService.returnDateFromUTC(
+      dateFormatedUTC,
+      true
+    );
 
     // console.log(this.responseData, this.filteredData, this.storeService.userData, 'modify ---');
 
     let responsDatalength = 0;
 
-    this.responseData.forEach(x => {
+    this.responseData.forEach((x) => {
       responsDatalength += x.length;
-    })
+    });
 
     let url = `${environment.API}modify`;
 
-    //on every time start new listener - clearing old interval 
+    //on every time start new listener - clearing old interval
     if (this.statesService.updateInterval) {
       clearInterval(this.statesService.updateInterval);
     }
 
     this.statesService.updateInterval = setInterval(() => {
-      this.subscription.add(this.dataService.getData(url, {
-        boats: responsDatalength,
-        bookings: this.bookedBoats,
-        status: this.chosenBoatsStatus,
-        location: this.storeService.userData.role
-      }, dateGMT).subscribe(Response => {
-        // console.log(Response);
+      this.subscription.add(
+        this.dataService
+          .getData(
+            url,
+            {
+              boats: responsDatalength,
+              bookings: this.bookedBoats,
+              status: this.chosenBoatsStatus,
+              location: this.storeService.userData.role,
+            },
+            dateGMT
+          )
+          .subscribe(
+            (Response) => {
+              // console.log(Response);
 
-        if (Response && Response.body) {
-          //set last update
-          dateGMT = Response.headers.get('last-modified');
-          if (Response.body.modifiedData.traffic_light && Response.body.modifiedData.traffic_light.length) {
-            console.log('************** update traffic light');
-            this.statesService.isTrafficLightUpdateEvent$.next({
-              isTrafficLightUpdate: true
-            })
-          }
+              if (Response && Response.body) {
+                //set last update
+                dateGMT = Response.headers.get('last-modified');
+                if (
+                  Response.body.modifiedData.traffic_light &&
+                  Response.body.modifiedData.traffic_light.length
+                ) {
+                  console.log('************** update traffic light');
+                  this.statesService.isTrafficLightUpdateEvent$.next({
+                    isTrafficLightUpdate: true,
+                  });
+                }
 
-          if (Response.body.modifiedData.boats && Response.body.modifiedData.boats.length) {
-            console.log('************** update boat');
-            this.getData();
-          }
+                if (
+                  Response.body.modifiedData.boats &&
+                  Response.body.modifiedData.boats.length
+                ) {
+                  console.log('************** update boat');
+                  this.getData();
+                }
 
-          //
-          this.bookedBoats = Response.body.modifiedData.bookedBoats;
-
-        }
-      }, error => {
-        // console.log(error, '----------------------');
-        // clearInterval(this.statesService.updateInterval);
-      }))
+                //
+                this.bookedBoats = Response.body.modifiedData.bookedBoats;
+              }
+            },
+            (error) => {
+              // console.log(error, '----------------------');
+              // clearInterval(this.statesService.updateInterval);
+            }
+          )
+      );
     }, 3000);
-
   }
 
-  // health check function - we are sending request and if this request fail (500 internal server error or 0 there Is No Response) we will show disabled window. 
+  // health check function - we are sending request and if this request fail (500 internal server error or 0 there Is No Response) we will show disabled window.
   healtHcheck(): void {
     const url = `${environment.API}health`;
 
     let requestParams = {
       terminal_id: this.storeService.userData._id,
-    }
+    };
 
     this.healthInterval = setInterval(() => {
-      this.subscription.add(this.dataService.getData(url, requestParams).subscribe(Response => {
-        // console.log(Response);
-        this.statesService.isHealth = true;
-      }, error => {
-        // console.log(error.status);
-        if (error.status === StatusCodes.thereIsNoResponse || error.status === StatusCodes.unexpectedCondition || error.status === StatusCodes.unauthorized) {
-          this.statesService.isHealth = false;
-        } else {
-          this.statesService.isHealth = true;
-        }
+      this.subscription.add(
+        this.dataService.getData(url, requestParams).subscribe(
+          (Response) => {
+            // console.log(Response);
+            this.statesService.isHealth = true;
+          },
+          (error) => {
+            // console.log(error.status);
+            if (
+              error.status === StatusCodes.thereIsNoResponse ||
+              error.status === StatusCodes.unexpectedCondition ||
+              error.status === StatusCodes.unauthorized
+            ) {
+              this.statesService.isHealth = false;
+            } else {
+              this.statesService.isHealth = true;
+            }
 
-        // console.log(this.statesService.isHealth)
+            // console.log(this.statesService.isHealth)
 
-        //
-        this.functionalService.onTokenExpiredGoToSignIn(error);
-      }))
-    }, 10000)
+            //
+            this.functionalService.onTokenExpiredGoToSignIn(error);
+          }
+        )
+      );
+    }, 10000);
   }
 
   //boat class warning modal display fucntions

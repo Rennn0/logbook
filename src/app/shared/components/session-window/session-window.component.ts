@@ -19,9 +19,7 @@ import {
   SessionWindowEnum,
 } from 'src/app/core/enums/session_window.enum';
 import { formFieldsObjectInterface } from 'src/app/core/interfaces/formFieldsObject.interface';
-import {
-  sessionEventTypeDataInterface,
-} from 'src/app/core/interfaces/session-window.interface';
+import { sessionEventTypeDataInterface } from 'src/app/core/interfaces/session-window.interface';
 import { DataService } from 'src/app/core/services/data/data.service';
 import { FunctionalService } from 'src/app/core/services/functions/functional.service';
 import { environment } from 'src/environments/environment';
@@ -151,26 +149,26 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   //
   categoryTypes: any[] = [
     {
-      name: "RENNBOOT",
-      value: "RENNBOOT",
+      name: 'RENNBOOT',
+      value: 'RENNBOOT',
     },
     {
-      name: "GIGBOOT",
-      value: "GIGBOOT",
+      name: 'GIGBOOT',
+      value: 'GIGBOOT',
     },
     {
-      name: "COASTAL",
-      value: "COASTAL",
+      name: 'COASTAL',
+      value: 'COASTAL',
     },
     {
-      name: "VENEZIANER",
-      value: "VENEZIANER",
+      name: 'VENEZIANER',
+      value: 'VENEZIANER',
     },
   ];
 
   categories: any[] = [];
 
-  //distance lists - array include key value object, this list items are rendered in session window in distance select 
+  //distance lists - array include key value object, this list items are rendered in session window in distance select
   routeList: any = [
     { name: 'Gerbermühle(6 km)', value: '6 km' },
     { name: 'Osthafen(4 km)', value: '4 km' },
@@ -202,7 +200,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     public functionalService: FunctionalService,
     private dataService: DataService,
     private storeService: StoreService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.load();
@@ -252,7 +250,11 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
           this.addSessionFormControlAccordingToConfig();
 
           this.getServerDate(true).then(() => {
-            this.setStartValue(this.choosenBoatData, response.body.booking, true);
+            this.setStartValue(
+              this.choosenBoatData,
+              response.body.booking,
+              true
+            );
             //show form in template
             this.isLoaded = true;
           });
@@ -357,8 +359,8 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
     if (this.choosenBoatData === undefined) {
       return new Promise((resolve, reject) => {
-        reject(false)
-      })
+        reject(false);
+      });
     }
 
     let body = {
@@ -466,7 +468,11 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
           // console.log(Response, '--------------------');
 
           Response.body.users.forEach((x: any) => {
-            this.steuermannValues.push({ name: x.firstName, lastName: x.lastName, id: x._id });
+            this.steuermannValues.push({
+              name: x.firstName,
+              lastName: x.lastName,
+              id: x._id,
+            });
           });
           //show form in template
           this.isLoaded = true;
@@ -484,10 +490,12 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
     try {
       const response = await this.dataService.getData(url).toPromise();
-      const formatedDate = moment.tz(
-        response.body.time * 1000,
-        Intl.DateTimeFormat().resolvedOptions().timeZone
-      ).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      const formatedDate = moment
+        .tz(
+          response.body.time * 1000,
+          Intl.DateTimeFormat().resolvedOptions().timeZone
+        )
+        .format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
       this.date = new Date(formatedDate);
       if (!isMinTimeDisabled) {
@@ -501,7 +509,11 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   }
 
   /*********** set - configuration functions */
-  setStartValue(choosenBoatData: any, responseBookingData?: any, isForgotten?: boolean): void {
+  setStartValue(
+    choosenBoatData: any,
+    responseBookingData?: any,
+    isForgotten?: boolean
+  ): void {
     let choosenBoatDataKeysArray = Object.keys(choosenBoatData);
 
     //set boat name
@@ -573,10 +585,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       );
 
       this.startDate = moment(
-        this.functionalService.returnDateFromUTC(
-          responseBookingData.date,
-          true
-        )
+        this.functionalService.returnDateFromUTC(responseBookingData.date, true)
       ).format('DD.MM.yyyy');
 
       //set clock
@@ -742,7 +751,9 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
         ).format('YYYY-MM-DD')
       );
 
-      this.startDate = moment(this.functionalService.returnDateFromUTC(responseData.startDate, true)).format('DD.MM.yyyy');
+      this.startDate = moment(
+        this.functionalService.returnDateFromUTC(responseData.startDate, true)
+      ).format('DD.MM.yyyy');
 
       //set clock
       this.sessionForm.controls[formControlNames.startClockControler].setValue(
@@ -801,8 +812,13 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       //add empty seats
       let membersLength = responseData.crew.length + responseData.guests.length;
 
-      if (membersLength < this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]]) {
-        let emptySeatsCount = this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]] - membersLength;
+      if (
+        membersLength <
+        this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]]
+      ) {
+        let emptySeatsCount =
+          this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]] -
+          membersLength;
         for (let i = 0; i < emptySeatsCount; i++) {
           this.teamMembersList.push(new FormControl(''));
         }
@@ -880,7 +896,9 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
         ).format('YYYY-MM-DD')
       );
 
-      this.startDate = moment(this.functionalService.returnDateFromUTC(responseData.startDate, true)).format('DD.MM.yyyy');
+      this.startDate = moment(
+        this.functionalService.returnDateFromUTC(responseData.startDate, true)
+      ).format('DD.MM.yyyy');
 
       //set clock
       this.sessionForm.controls[formControlNames.startClockControler].setValue(
@@ -943,15 +961,26 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
             new FormControl(this.ifExistValue(responseData.guests[i].name))
           );
 
-          this.gustsFullList.push({ _id: responseData.guests[i]._id, name: this.ifExistValue(responseData.guests[i].name), seat: this.teamMembersList.value.indexOf(this.ifExistValue(responseData.guests[i].name)) })
+          this.gustsFullList.push({
+            _id: responseData.guests[i]._id,
+            name: this.ifExistValue(responseData.guests[i].name),
+            seat: this.teamMembersList.value.indexOf(
+              this.ifExistValue(responseData.guests[i].name)
+            ),
+          });
         }
       }
 
       //add empty seats
       let membersLength = responseData.crew.length + responseData.guests.length;
 
-      if (membersLength < this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]]) {
-        let emptySeatsCount = this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]] - membersLength;
+      if (
+        membersLength <
+        this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]]
+      ) {
+        let emptySeatsCount =
+          this.choosenBoatData[choosenBoatDataKeysArray[boatSeatsIndex]] -
+          membersLength;
         for (let i = 0; i < emptySeatsCount; i++) {
           this.teamMembersList.push(new FormControl(''));
         }
@@ -1025,7 +1054,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   //
   setExternalValue(prefillData: any): void {
     // console.log(prefillData, '--------------');
-    //add fields in config for external session 
+    //add fields in config for external session
 
     let fieldsToAdd = [
       {
@@ -1034,15 +1063,30 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
         isEditable: true,
       },
       { formControlName: 'Lfd', controlType: formControlTypes.formControl },
-      { formControlName: 'freeHelper', controlType: formControlTypes.formControl },
-      { formControlName: 'rideType', controlType: formControlTypes.formControl },
-      { formControlName: 'startDate', controlType: formControlTypes.formControl },
+      {
+        formControlName: 'freeHelper',
+        controlType: formControlTypes.formControl,
+      },
+      {
+        formControlName: 'rideType',
+        controlType: formControlTypes.formControl,
+      },
+      {
+        formControlName: 'startDate',
+        controlType: formControlTypes.formControl,
+      },
       {
         formControlName: 'startClock',
         controlType: formControlTypes.formControl,
       },
-      { formControlName: 'routeText', controlType: formControlTypes.formControl },
-      { formControlName: 'routeTextDistance', controlType: formControlTypes.formControl },
+      {
+        formControlName: 'routeText',
+        controlType: formControlTypes.formControl,
+      },
+      {
+        formControlName: 'routeTextDistance',
+        controlType: formControlTypes.formControl,
+      },
       {
         formControlName: formControlNames.startEndDate,
         controlType: formControlTypes.formControl,
@@ -1053,13 +1097,16 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       },
       { formControlName: 'team', controlType: formControlTypes.formArray },
       { formControlName: 'comment', controlType: formControlTypes.formControl },
-    ]
+    ];
 
     //clear cox to select it again
     this.selectedCoxFullName = '';
     if (prefillData.preFill.isCoxed) {
       this.isCox = true;
-      fieldsToAdd.push({ formControlName: 'externalCox', controlType: formControlTypes.formControl })
+      fieldsToAdd.push({
+        formControlName: 'externalCox',
+        controlType: formControlTypes.formControl,
+      });
       this.steuermannValues = [];
       this.getSteuermann();
     } else {
@@ -1067,8 +1114,10 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     }
 
     //
-    fieldsToAdd.forEach(field => {
-      let fieldIndexInFormFields = this.formFields.findIndex(x => x.formControlName === field.formControlName);
+    fieldsToAdd.forEach((field) => {
+      let fieldIndexInFormFields = this.formFields.findIndex(
+        (x) => x.formControlName === field.formControlName
+      );
       if (fieldIndexInFormFields === -1) {
         this.formFields.push(field);
       }
@@ -1080,7 +1129,6 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     let date = moment(changeLocalTime, 'ddd MMM D YYYY HH:mm:ss ZZ');
     date.set({ h: 24, m: 0 });
     this.maxTime = moment(date).format('yyyy-MM-DDTHH:mm:ss.SSSZ');
-
 
     //set road type
     this.sessionForm.controls[formControlNames.rideTypeControler].setValue(
@@ -1120,11 +1168,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     //claer form controls before create new
     this.teamMembersList.clear();
 
-    for (
-      let i = 0;
-      i < boatSeatsIndex;
-      i++
-    ) {
+    for (let i = 0; i < boatSeatsIndex; i++) {
       this.teamMembersList.push(new FormControl(''));
     }
   }
@@ -1203,17 +1247,17 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
         } else {
           let index = this.gustsFullList.findIndex((i: any) => {
             return i.seat === itemIndex;
-          })
+          });
 
           if (index !== -1) {
             body.guests.push({
               id: this.gustsFullList[index]._id,
-              name: x
+              name: x,
             });
           } else if (x) {
             body.guests.push({
               id: null,
-              name: x
+              name: x,
             });
           }
         }
@@ -1283,7 +1327,9 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
     let body: any = {
       boat: this.choosenBoatData._id,
-      competency: this.functionalService.returnCompetency(this.choosenBoatData.competency),
+      competency: this.functionalService.returnCompetency(
+        this.choosenBoatData.competency
+      ),
       captain:
         this.sessionForm.controls[formControlNames.teamControler].value[0],
       // comment: this.sessionForm.controls[formControlNames.commentControler].value,
@@ -1347,9 +1393,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
           (i) => `${i.firstName} ${i.lastName}` === x
         );
 
-        let indexInGuest = body.guests.findIndex(
-          (i: any) => i.name === x
-        );
+        let indexInGuest = body.guests.findIndex((i: any) => i.name === x);
 
         if (indexInfoundUsersList !== -1 && indexInGuest === -1) {
           body.crew.push(this.foundUsersList[indexInfoundUsersList]._id);
@@ -1484,7 +1528,8 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     };
 
     if (this.sessionForm.controls[formControlNames.commentControler].value) {
-      body.comment = this.sessionForm.controls[formControlNames.commentControler].value;
+      body.comment =
+        this.sessionForm.controls[formControlNames.commentControler].value;
     }
 
     if (this.isCox) {
@@ -1505,7 +1550,8 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       new Date(this.sessionForm.controls[formControlNames.startEndDate].value)
     );
     let dateEnd = moment(changeEndLocalTime, 'ddd MMM D YYYY HH:mm:ss');
-    let timeEnd = this.sessionForm.controls[formControlNames.startEndDate].value;
+    let timeEnd =
+      this.sessionForm.controls[formControlNames.startEndDate].value;
     dateEnd.set({
       h: Number(moment(timeEnd).format('HH')),
       m: Number(moment(timeEnd).format('mm')),
@@ -1548,9 +1594,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
           (i) => `${i.firstName} ${i.lastName}` === x
         );
 
-        let indexInGuest = body.guests.findIndex(
-          (i: any) => i.name === x
-        );
+        let indexInGuest = body.guests.findIndex((i: any) => i.name === x);
 
         if (indexInfoundUsersList !== -1 && indexInGuest === -1) {
           body.crew.push(this.foundUsersList[indexInfoundUsersList]._id);
@@ -1623,8 +1667,10 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       user_group: 'EXTERNAL',
       captain:
         this.sessionForm.controls[formControlNames.teamControler].value[0],
-      comment: this.sessionForm.controls[formControlNames.commentControler].value,
-      route: this.sessionForm.controls[formControlNames.textFieldControler].value,
+      comment:
+        this.sessionForm.controls[formControlNames.commentControler].value,
+      route:
+        this.sessionForm.controls[formControlNames.textFieldControler].value,
       distance: Number(
         this.sessionForm.controls[
           formControlNames.routeTextDistanceControler
@@ -1632,7 +1678,8 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       ),
       crew: [],
       externalCrew: [],
-      sessionNumber: this.sessionForm.controls[formControlNames.LfdControler].value,
+      sessionNumber:
+        this.sessionForm.controls[formControlNames.LfdControler].value,
       sessionType:
         this.sessionForm.controls[formControlNames.rideTypeControler].value,
       status: 'FINISHED',
@@ -1641,18 +1688,28 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     if (this.isCox) {
       // set externalCox value
       if (this.externalCoxIndex) {
-        body.cox = this.externalCoxIndex
-      } else if (this.sessionForm.controls[formControlNames.externalCox] && this.sessionForm.controls[formControlNames.externalCox].value) {
-        body.cox = this.sessionForm.controls[formControlNames.externalCox].value;
+        body.cox = this.externalCoxIndex;
+      } else if (
+        this.sessionForm.controls[formControlNames.externalCox] &&
+        this.sessionForm.controls[formControlNames.externalCox].value
+      ) {
+        body.cox =
+          this.sessionForm.controls[formControlNames.externalCox].value;
       }
     }
 
     // set helper value
     if (this.externalObmanIndex) {
-      body.helper = this.externalObmanIndex
-    } else if (this.sessionForm.controls[formControlNames.chairmanFreeFieldControler] && this.sessionForm.controls[formControlNames.chairmanFreeFieldControler].value) {
+      body.helper = this.externalObmanIndex;
+    } else if (
+      this.sessionForm.controls[formControlNames.chairmanFreeFieldControler] &&
+      this.sessionForm.controls[formControlNames.chairmanFreeFieldControler]
+        .value
+    ) {
       body.helper =
-        this.sessionForm.controls[formControlNames.chairmanFreeFieldControler].value;
+        this.sessionForm.controls[
+          formControlNames.chairmanFreeFieldControler
+        ].value;
     }
 
     //set end date
@@ -1660,7 +1717,8 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
       new Date(this.sessionForm.controls[formControlNames.startEndDate].value)
     );
     let dateEnd = moment(changeEndLocalTime, 'ddd MMM D YYYY HH:mm:ss');
-    let timeEnd = this.sessionForm.controls[formControlNames.startEndDate].value;
+    let timeEnd =
+      this.sessionForm.controls[formControlNames.startEndDate].value;
     dateEnd.set({
       h: Number(moment(timeEnd).format('HH')),
       m: Number(moment(timeEnd).format('mm')),
@@ -1703,9 +1761,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
           (i) => `${i.firstName} ${i.lastName}` === x
         );
 
-        let indexInGuest = body.externalCrew.findIndex(
-          (i: any) => i === x
-        );
+        let indexInGuest = body.externalCrew.findIndex((i: any) => i === x);
 
         if (indexInfoundUsersList !== -1 && indexInGuest === -1) {
           body.crew.push(this.foundUsersList[indexInfoundUsersList]._id);
@@ -1828,22 +1884,32 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
     let selectedObmanIndex = teamMembers.value.indexOf(this.selectedObman);
 
-
     //find coxx in obmann list
-    let selectedObmanIndexInChairmanValues = this.chairmanValues.findIndex((x: any) => `${x.name} ${x.lastName}` === this.selectedObman);
+    let selectedObmanIndexInChairmanValues = this.chairmanValues.findIndex(
+      (x: any) => `${x.name} ${x.lastName}` === this.selectedObman
+    );
 
     //check if obmann is not selected as crew member && cox was selected as obmann and thay are same user - if this is true, we are moveing obmann in new obmann list and disableing selected obmann remove function
-    if (selectedObmanIndex === -1 && this.selectedObman === this.selectedCoxFullName && selectedObmanIndexInChairmanValues !== -1) {
-      newChairmanValues.push(this.chairmanValues[selectedObmanIndexInChairmanValues]);
+    if (
+      selectedObmanIndex === -1 &&
+      this.selectedObman === this.selectedCoxFullName &&
+      selectedObmanIndexInChairmanValues !== -1
+    ) {
+      newChairmanValues.push(
+        this.chairmanValues[selectedObmanIndexInChairmanValues]
+      );
       removeUserFromObmanm = false;
     }
 
     this.chairmanValues = [];
     this.chairmanValues = [...newChairmanValues];
 
-    //remove user from selected obmann 
+    //remove user from selected obmann
     // console.log('remove user from selected obmann', '-------------');
-    if (!this.chairmanValues.length || selectedObmanIndex === -1 && removeUserFromObmanm) {
+    if (
+      !this.chairmanValues.length ||
+      (selectedObmanIndex === -1 && removeUserFromObmanm)
+    ) {
       this.selectedObman = '';
       this.sessionForm.controls[formControlNames.chairmanControler].setValue(
         ''
@@ -1895,9 +1961,9 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   selectCategoryType(type: any): void {
     this.selectedCategoryType = type.name;
     //set selectBoatTypeControler
-    this.sessionForm.controls[formControlNames.selectBoatTypeControler].setValue(
-      type.name
-    );
+    this.sessionForm.controls[
+      formControlNames.selectBoatTypeControler
+    ].setValue(type.name);
 
     this.getCategoriesType(type.name);
   }
@@ -1910,35 +1976,35 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
     this.categories = [];
 
-    this.subscription.add(this.dataService.getData(url).subscribe(Response => {
-      console.log(Response);
+    this.subscription.add(
+      this.dataService.getData(url).subscribe((Response) => {
+        console.log(Response);
 
-      Response.body.categories.forEach((x: string) => {
-        this.categories.push({
-          name: x,
-          value: x,
-        }
-        );
-      });
+        Response.body.categories.forEach((x: string) => {
+          this.categories.push({
+            name: x,
+            value: x,
+          });
+        });
 
-      //show field
-      this.formFields[
-        this.functionalService.returnIndexInArray(
-          this.formFields,
-          'select_boat_category'
-        )
-      ].display = true;
-
-    }))
-  };
+        //show field
+        this.formFields[
+          this.functionalService.returnIndexInArray(
+            this.formFields,
+            'select_boat_category'
+          )
+        ].display = true;
+      })
+    );
+  }
 
   //
   setExternalObman(externalObman: any): void {
     if (externalObman._id) {
-      this.externalObmanIndex = externalObman._id
-      this.sessionForm.controls[formControlNames.chairmanFreeFieldControler].setValue(
-        `${externalObman?.firstName} ${externalObman?.lastName}`
-      );
+      this.externalObmanIndex = externalObman._id;
+      this.sessionForm.controls[
+        formControlNames.chairmanFreeFieldControler
+      ].setValue(`${externalObman?.firstName} ${externalObman?.lastName}`);
     }
     this.activeSuggestIndex = '';
   }
@@ -1946,7 +2012,9 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   setExternalCox(externalCox: any): void {
     if (externalCox.id) {
       this.externalCoxIndex = externalCox.id;
-      this.sessionForm.controls[formControlNames.externalCox].setValue(`${externalCox?.name} ${externalCox?.lastName}`);
+      this.sessionForm.controls[formControlNames.externalCox].setValue(
+        `${externalCox?.name} ${externalCox?.lastName}`
+      );
     }
     this.activeSuggestIndex = '';
   }
@@ -1955,25 +2023,26 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
   selectCategory(type: any): void {
     this.selectedCategories = type.name;
     //set selectBoatTypeControler
-    this.sessionForm.controls[formControlNames.selectBoatCategoryControler].setValue(
-      type.name
-    );
+    this.sessionForm.controls[
+      formControlNames.selectBoatCategoryControler
+    ].setValue(type.name);
 
-    this.getPrefillDataByCategories(type.name).then((response) => {
-      this.isCox = response.body.isCoxed;
+    this.getPrefillDataByCategories(type.name)
+      .then((response) => {
+        this.isCox = response.body.isCoxed;
 
-      if (this.isCox) {
-        this.getSteuermann();
-      }
+        if (this.isCox) {
+          this.getSteuermann();
+        }
 
-      // this.addSessionFormControlAccordingToConfig();
+        // this.addSessionFormControlAccordingToConfig();
 
-      this.getServerDate(true).then(() => {
-        this.setExternalValue(response.body);
-        //show form in template
-        // this.isLoaded = true;
-      });
-    })
+        this.getServerDate(true).then(() => {
+          this.setExternalValue(response.body);
+          //show form in template
+          // this.isLoaded = true;
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -1984,11 +2053,16 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     const url = `${environment.API}sessions/prefill/external?category=${category}`;
 
     return new Promise<any>((resolve, reject) => {
-      this.subscription.add(this.dataService.getData(url).subscribe(Response => {
-        resolve(Response)
-      }, error => {
-        reject(error)
-      }))
+      this.subscription.add(
+        this.dataService.getData(url).subscribe(
+          (Response) => {
+            resolve(Response);
+          },
+          (error) => {
+            reject(error);
+          }
+        )
+      );
     });
   }
 
@@ -2002,9 +2076,11 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
   isMemberGuest(member: string): boolean {
     try {
-      let index = this.choosenBoatServerData.session.guests.findIndex((x: any) => this.ifExistValue(x.name) === member);
+      let index = this.choosenBoatServerData.session.guests.findIndex(
+        (x: any) => this.ifExistValue(x.name) === member
+      );
       if (index !== -1) {
-        return true
+        return true;
       }
       return false;
     } catch (error) {
@@ -2025,7 +2101,7 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
     this.externalCoxIndex = '';
     // console.log(searchTerm, this.steuermannValues, '-------------');
     let result = this.steuermannValues.filter((user: any) => {
-      let fullName = user.name + " " + user.lastName;
+      let fullName = user.name + ' ' + user.lastName;
       return (
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -2087,14 +2163,16 @@ export class SessionWindowComponent implements OnInit, OnDestroy {
 
   setDatePickerLocalization(): void {
     let int = setTimeout(() => {
-      let elementContainer = document.getElementsByClassName('owl-dt-container-buttons') as HTMLCollection;
+      let elementContainer = document.getElementsByClassName(
+        'owl-dt-container-buttons'
+      ) as HTMLCollection;
       //cancel
       elementContainer[0].children[0].children[0].innerHTML = 'Abbruch';
 
       //set
       elementContainer[0].children[1].children[0].innerHTML = 'Einfügen';
       clearInterval(int);
-    }, 0)
+    }, 0);
   }
 
   ngOnDestroy(): void {

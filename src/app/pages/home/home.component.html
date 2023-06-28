@@ -8,6 +8,10 @@
     </div>
   </div>
 </ng-container>
+<ng-container *ngIf="displayPlanCourse">
+  <app-plan-course></app-plan-course>
+</ng-container>
+
 <div class="page page--header-placeholder page--home h-100">
   <div class="page__boats-container">
     <div class="boats-tab">
@@ -388,22 +392,38 @@
                 </button>
               </div>
               <div>
+                <div>
+                  <button
+                    [class.disabled]="
+                      !chosenBoat ||
+                      trafficLightService?.terminalState ===
+                        publicTrafficLightEnum?.terminalRed
+                    "
+                    (click)="
+                      showSessionDisplay(
+                        publicSessionWindowEnum?.forgottenBoatSession
+                      )
+                    "
+                    class="btn btn--home-type btn--success-light"
+                  >
+                    {{ publicLanguageGer?.forgottenBoatSession }}
+                  </button>
+                </div>
+                <!-- ////////////////////////// -->
+                <!-- [class.disabled]="
+                  !chosenBoat ||
+                  trafficLightService?.terminalState ===
+                    publicTrafficLightEnum?.terminalRed
+                " -->
                 <button
-                  [class.disabled]="
-                    !chosenBoat ||
-                    trafficLightService?.terminalState ===
-                      publicTrafficLightEnum?.terminalRed
-                  "
-                  (click)="
-                    showSessionDisplay(
-                      publicSessionWindowEnum?.forgottenBoatSession
-                    )
-                  "
-                  class="btn btn--home-type btn--success-light"
+                  (click)="showPlanCourse()"
+                  class="btn btn--home-type btn--success-blue"
                 >
-                  {{ publicLanguageGer?.forgottenBoatSession }}
+                  PLAN COURSE
                 </button>
+                <!-- ////////////////////////// -->
               </div>
+
               <ng-container *ngIf="isUserAdmin">
                 <div>
                   <button

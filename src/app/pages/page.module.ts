@@ -5,9 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 
-
 @NgModule({
   declarations: [HomeComponent, SigninComponent],
   imports: [CommonModule, PipeModule, SharedModule],
 })
-export class PageModule { }
+export class PageModule {}

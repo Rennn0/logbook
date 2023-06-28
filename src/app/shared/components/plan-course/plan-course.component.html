@@ -1,0 +1,155 @@
+<div class="PlanCourseContainer">
+  <div class="PlanCourseContainer__Card">
+    <div class="Card_Navbar">
+      <p>PLAN COURSE</p>
+
+      <button (click)="exit()">✖</button>
+    </div>
+    <div class="Card_MainContent">
+      <div class="_input_search_">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Boot suchen"
+          [(ngModel)]="pattern"
+          (click)="renderOK()"
+        />
+
+        <img src="../../../../assets/icons/searchIcon.png" alt="search" />
+      </div>
+
+      <div class="_results_" *ngIf="render">
+        <ng-container
+          *ngFor="let boat of myBoatData | filterBoats : pattern; let i = index"
+        >
+          <div class="_each_result_">
+            <button (click)="addToList(boat)">+</button>
+            <div>
+              {{ boat.name }}
+            </div>
+            <div>
+              <span> • </span> Kategorie:
+              {{ boat.category.charAt(0).toUpperCase() }}
+            </div>
+          </div>
+        </ng-container>
+        <div *ngIf="(myBoatData | filterBoats : pattern).length === 0">
+          No Results
+        </div>
+      </div>
+
+      <div class="_selecteds_" (click)="renderNO()">
+        <p>Selected Boats (s)</p>
+        {{ !count ? "No Boats Selected" : "" }}
+        <div class="container_">
+          <ng-container *ngFor="let chosen of chosenCoursesList">
+            <div class="_each_select_">
+              <p>{{ chosen.name }},{{ chosen.category }}</p>
+              <button (click)="removeFromList(chosen)">x</button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="_scheduled_" *ngIf="renderCount">
+        <p>Schedule</p>
+        <div class="schedule_container_">
+          <div class="_title">
+            <p>Date</p>
+            <p>Start Time</p>
+            <p>End Time</p>
+            <p>Weekly Repeat</p>
+          </div>
+
+          <div class="_list" *ngFor="let data of dataToRender">
+            <p>{{ data.date }}</p>
+            <p>{{ data.startTime }}</p>
+            <p>{{ data.endTime }}</p>
+            <p>{{ data.weeklyRepeat }} weeks</p>
+            <img
+              src="../../../../assets/icons/edit.svg"
+              alt="add"
+              (click)="editScheduled(data)"
+            />
+            <img
+              src="../../../../assets/icons/close.svg"
+              alt="del"
+              (click)="deleteScheduled(data)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="_calendar_" id="t">
+        <div class="header_">
+          <div class="calendar" id="calendar" (click)="toggleCalendar()">
+            <img src="../../../../assets/icons/date.svg" alt="date" id="img" />
+          </div>
+          <p id="title">
+            {{ expandCalendar ? expandedTitle : notExpandedTitle }}
+          </p>
+        </div>
+
+        <form *ngIf="expandCalendar" class="expanded_">
+          <div class="top_">
+            <div class="_top_left_">
+              <label for="date">Choose date</label>
+              <input
+                type="date"
+                name="date"
+                id="d"
+                [(ngModel)]="myCourseData.date"
+              />
+            </div>
+            <div class="_top_right_">
+              <label for="ST">Start Time</label>
+              <input
+                type="text"
+                name="ST"
+                id="st"
+                placeholder="10:00"
+                [(ngModel)]="myCourseData.startTime"
+              />
+
+              <label for="ET">End Time</label>
+              <input
+                type="text"
+                name="ET"
+                id="et"
+                placeholder="11:30"
+                [(ngModel)]="myCourseData.endTime"
+              />
+
+              <label for="WP">Weekly Repeat</label>
+              <select name="WP" id="wp" [(ngModel)]="myCourseData.weeklyRepeat">
+                <!-- <option disabled selected>-Choose-</option> -->
+                <option value="1">1 Week</option>
+                <option value="2">2 Week</option>
+                <option value="3">3 Week</option>
+              </select>
+            </div>
+          </div>
+          <div class="bot_">
+            <p>
+              {{
+                myCourseData.weekDay
+                  ? "Occurs every " +
+                    myCourseData.weeklyRepeat +
+                    " weeks on " +
+                    myCourseData.weekDay +
+                    " starting " +
+                    myCourseData.date
+                  : ""
+              }}
+            </p>
+            <div class="buttons_">
+              <button>CANCEL</button>
+              <button (click)="onSubmit()">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
