@@ -1,5 +1,6 @@
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { formElementsIndex } from 'src/app/core/enums/session_window.enum';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 export interface CourseData {
@@ -16,12 +17,11 @@ export interface CourseData {
   styleUrls: ['./plan-course.component.scss'],
 })
 export class PlanCourseComponent {
-  @HostListener('document:keydown.escape', ['$event'])
-  escapeEvent(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape', ['$keyEvent'])
+  escapeEvent(keyEvent: KeyboardEvent) {
     this.renderNO();
   }
 
-  count: number = 0;
   myBoatData: any[];
   pattern: string = '';
   render: boolean = false;
@@ -31,29 +31,63 @@ export class PlanCourseComponent {
   notExpandedTitle: string = 'CHOOSE DATE AND TIME';
 
   myCourseData: CourseData;
+  inputsFilled = false;
 
   dataToRender: CourseData[] = [];
   renderCount: number = 0;
 
   formControl: FormGroup;
-
+  editing: boolean = false;
+  editingIndex: number;
+  editingIcon = '../../../../assets/icons/drop-down-grey.svg';
+  notEditingIcon = '../../../../assets/icons/edit.svg';
   constructor(private c: HomeComponent, private fb: FormBuilder) {
     this.myBoatData = c.getFilteredData();
     // console.log(this.myBoatData);
-    this.formControl = this.fb.group({
-      date: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
-      repeat: ['', Validators.required],
-    });
+    // this.formControl = this.fb.group({
+    //   date: ['', Validators.required],
+    //   startTime: ['', Validators.required],
+    //   endTime: ['', Validators.required],
+    //   repeat: ['', Validators.required],
+    // });
+
+    // setInterval(() => {
+    //   console.log(this.chosenCoursesList);
+    // }, 5000);
   }
 
-  editScheduled(data: CourseData) {}
+  formSubmit() {
+    console.log(this.chosenCoursesList, this.dataToRender);
+  }
+
+  checkInputFields() {
+    this.myCourseData.weekDay = this.getWeekDayName(
+      this.myCourseData.date,
+      'en-US'
+    );
+    for (let key in this.myCourseData) {
+      if (
+        this.myCourseData[key] === '' ||
+        this.myCourseData[key] === 0 ||
+        this.myCourseData[key] === undefined
+      ) {
+        return;
+      }
+    }
+    this.inputsFilled = true;
+  }
+
+  editScheduled(data: CourseData, index: number) {
+    this.editing = !this.editing;
+    this.editingIndex = index;
+    console.log(data, this.dataToRender);
+  }
   deleteScheduled(data: CourseData) {
     this.dataToRender = this.dataToRender.filter((item) => item !== data);
   }
 
   onSubmit() {
+    this.inputsFilled = false;
     this.myCourseData.weekDay = this.getWeekDayName(
       this.myCourseData.date,
       'en-US'
@@ -77,8 +111,8 @@ export class PlanCourseComponent {
   }
 
   toggleCalendar() {
+    this.inputsFilled = false;
     const calDom = document.getElementById('t');
-
     if (this.dataToRender.length > 0) {
       calDom.style.setProperty('--border', 'none');
       const imgDom = document.getElementById('img');
@@ -106,16 +140,12 @@ export class PlanCourseComponent {
 
   removeFromList(data: any) {
     this.chosenCoursesList = this.chosenCoursesList.filter((obj) => {
-      obj !== data;
-      this.count--;
+      return obj._id !== data._id;
     });
-    console.log(this.chosenCoursesList, this.count);
   }
 
   addToList(boat: any) {
     this.chosenCoursesList.push(boat);
-    this.count++;
-    console.log(this.chosenCoursesList, this.count);
   }
 
   exit() {
