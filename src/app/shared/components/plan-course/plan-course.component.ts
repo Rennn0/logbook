@@ -1,6 +1,5 @@
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { formElementsIndex } from 'src/app/core/enums/session_window.enum';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 export interface CourseData {
