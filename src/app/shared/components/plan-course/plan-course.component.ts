@@ -1,5 +1,5 @@
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
@@ -9,6 +9,11 @@ export interface CourseData {
   endTime: string;
   weeklyRepeat: number;
   weekDay: string;
+}
+
+export interface planCourseInterface {
+  boatIDs: string[];
+  courses: CourseData[];
 }
 
 @Component({
@@ -31,22 +36,53 @@ export class PlanCourseComponent {
   notExpandedTitle: string = 'CHOOSE DATE AND TIME';
 
   myCourseData: CourseData;
-  templateCourseData: CourseData;
   inputsFilled = false;
 
   dataToRender: CourseData[] = [];
   renderCount: number = 0;
 
+  tempCourseData: CourseData = {
+    date: '',
+    startTime: '',
+    endTime: '',
+    weeklyRepeat: 0,
+    weekDay: '',
+  };
   editing: boolean = false;
   editingIndex: number;
+  editingData: CourseData;
   editingIcon = '../../../../assets/icons/drop-down-grey.svg';
   notEditingIcon = '../../../../assets/icons/edit.svg';
-  constructor(private c: HomeComponent, private fb: FormBuilder) {
-    this.myBoatData = c.getFilteredData();
-  }
 
   dayName: string;
   pickedDate: string;
+  minDate: string;
+  constructor(private c: HomeComponent, private fb: FormBuilder) {
+    this.myBoatData = c.getFilteredData();
+    const today = new Date();
+    today.setDate(today.getDate() + 7);
+    this.minDate = today.toISOString().split('T')[0];
+    console.log(this.minDate);
+  }
+
+  saveChanges() {
+    this.myCourseData = {
+      date: '',
+      startTime: '',
+      endTime: '',
+      weeklyRepeat: 0,
+      weekDay: '',
+    };
+    this.editing = false;
+    this.toggleCalendar();
+    // console.log('SAVE', this.tempCourseData, this.myCourseData);
+  }
+
+  discardChanges() {
+    this.dataToRender[this.editingIndex] = this.tempCourseData;
+    this.editing = false;
+    this.toggleCalendar();
+  }
 
   setStartDateDisplay(time: any): void {
     const date = new Date(time.value);
@@ -67,18 +103,26 @@ export class PlanCourseComponent {
       day: 'numeric',
     });
     this.myCourseData.date = this.pickedDate;
+    this.myCourseData.weekDay = this.dayName;
   }
 
+  finalForm: planCourseInterface = {
+    boatIDs: [],
+    courses: [],
+  };
   formSubmit() {
     console.log(this.chosenCoursesList, this.dataToRender);
+
+    for (let item of this.chosenCoursesList) {
+      this.finalForm.boatIDs.push(item._id);
+    }
+
+    this.finalForm.courses = [...this.dataToRender];
+
+    console.log(this.finalForm);
   }
 
   checkInputFields() {
-    console.log(this.myCourseData);
-    this.myCourseData.weekDay = this.getWeekDayName(
-      this.myCourseData.date,
-      'en-US'
-    );
     for (let key in this.myCourseData) {
       if (
         this.myCourseData[key] === '' ||
@@ -92,24 +136,30 @@ export class PlanCourseComponent {
   }
 
   editScheduled(data: CourseData, index: number) {
+    if (
+      this.editing &&
+      !(this.editingData === data) &&
+      !(this.editingIndex === index)
+    )
+      return;
+
+    if (this.expandCalendar) return;
     this.editing = !this.editing;
     this.editingIndex = index;
-    console.log(data, this.dataToRender);
+    this.editingData = data;
+    this.toggleCalendar(data);
   }
   deleteScheduled(data: CourseData) {
-    this.dataToRender = this.dataToRender.filter((item) => item !== data);
+    if (!this.editing) {
+      this.dataToRender = this.dataToRender.filter((item) => item !== data);
+    }
   }
 
   onSubmit() {
     this.inputsFilled = false;
-    this.myCourseData.weekDay = this.getWeekDayName(
-      this.myCourseData.date,
-      'en-US'
-    );
-    this.myCourseData.date = this.myCourseData.date.replace(/-/g, '.');
     this.dataToRender.push(this.myCourseData);
     this.renderCount++;
-    // console.log(this.myCourseData, this.dataToRender);
+
     this.myCourseData = {
       date: '',
       startTime: '',
@@ -124,8 +174,9 @@ export class PlanCourseComponent {
     return date_.toLocaleDateString(locale, { weekday: 'long' });
   }
 
-  toggleCalendar() {
-    this.inputsFilled = false;
+  toggleCalendar(editingData: CourseData = undefined) {
+    if (this.editing && this.expandCalendar) return;
+
     const calDom = document.getElementById('t');
     if (this.dataToRender.length > 0) {
       calDom.style.setProperty('--border', 'none');
@@ -139,10 +190,17 @@ export class PlanCourseComponent {
     }
 
     this.expandCalendar = !this.expandCalendar;
-    // calDom.style.setProperty(
-    //   '--calendar-size',
-    //   this.expandCalendar ? '50%' : 'auto'
-    // );
+    if (this.editing) {
+      this.myCourseData = editingData;
+      this.tempCourseData = {
+        ...this.myCourseData,
+      };
+      // console.log('EDITING TOGGLE', this.tempCourseData, this.myCourseData);
+      return;
+    }
+    this.inputsFilled = false;
+
+    // console.log('BEFORE TOGGLE', this.myCourseData);
     this.myCourseData = {
       date: '',
       startTime: '',

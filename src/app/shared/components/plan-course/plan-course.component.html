@@ -63,32 +63,10 @@
           </div>
 
           <div class="_list" *ngFor="let data of dataToRender; let i = index">
-            <p *ngIf="!editing || i !== editingIndex">{{ data.date }}</p>
-            <p *ngIf="!editing || i !== editingIndex">{{ data.startTime }}</p>
-            <p *ngIf="!editing || i !== editingIndex">{{ data.endTime }}</p>
-            <p *ngIf="!editing || i !== editingIndex">
-              {{ data.weeklyRepeat }} weeks
-            </p>
-            <input
-              *ngIf="editing && i === editingIndex"
-              [(ngModel)]="data.date"
-              placeholder="date"
-            />
-            <input
-              *ngIf="editing && i === editingIndex"
-              [(ngModel)]="data.startTime"
-              placeholder="start time"
-            />
-            <input
-              *ngIf="editing && i === editingIndex"
-              [(ngModel)]="data.endTime"
-              placeholder="end time"
-            />
-            <input
-              *ngIf="editing && i === editingIndex"
-              [(ngModel)]="data.weeklyRepeat"
-              placeholder="repeat every x weeks"
-            />
+            <p>{{ data.date }}</p>
+            <p>{{ data.startTime }}</p>
+            <p>{{ data.endTime }}</p>
+            <p>{{ data.weeklyRepeat }} weeks</p>
             <img
               [src]="
                 editing && i === editingIndex ? editingIcon : notEditingIcon
@@ -111,7 +89,7 @@
             <img src="../../../../assets/icons/date.svg" alt="date" id="img" />
           </div>
           <p id="title">
-            {{ expandCalendar ? expandedTitle : notExpandedTitle }}
+            {{ expandCalendar && !editing ? expandedTitle : notExpandedTitle }}
           </p>
         </div>
 
@@ -128,6 +106,8 @@
                   (dateTimeInput)="
                     setStartDateDisplay($event); checkInputFields()
                   "
+                  [min]="minDate"
+                  [placeholder]="myCourseData?.date"
                   class="form__input"
                   name="date"
                 />
@@ -185,10 +165,20 @@
               }}
             </p>
             <div class="buttons_">
-              <button (click)="toggleCalendar()">CANCEL</button>
-              <button [disabled]="!inputsFilled" (click)="onSubmit()">
+              <button *ngIf="!editing" (click)="toggleCalendar()">
+                CANCEL
+              </button>
+              <button
+                [disabled]="!inputsFilled"
+                *ngIf="!editing"
+                (click)="onSubmit()"
+              >
                 SUBMIT
               </button>
+              <button *ngIf="editing" (click)="discardChanges()">
+                DISCARD
+              </button>
+              <button *ngIf="editing" (click)="saveChanges()">SAVE</button>
             </div>
           </div>
         </form>
