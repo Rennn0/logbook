@@ -46,7 +46,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      --calendar-size: 10%;
+      --calendar-size: auto;
 
       ._scheduled_ {
         width: 77.9%;
@@ -199,18 +199,19 @@
             display: flex;
             justify-content: space-between;
             p {
-              margin: auto 0 auto 2%;
+              margin: 20px;
             }
             .buttons_ {
               width: 30%;
               height: 80%;
-              margin: auto 3% auto 0;
+              margin: 0 3% 5px 0;
 
               button {
                 border: none;
                 width: 50%;
                 height: 100%;
                 border-radius: 5px;
+                margin: 20px auto;
               }
 
               button:first-child {
@@ -342,7 +343,7 @@
           display: flex;
           flex-wrap: wrap;
           ._each_select_ {
-            width: 24%;
+            width: auto;
             height: auto;
             min-height: 40px;
             display: flex;
@@ -372,28 +373,30 @@
           }
         }
       }
+    }
+    ._submit_cancel_ {
+      margin: 0 auto;
+      height: 10%;
+      display: flex;
+      width: 100%;
+      justify-content: end;
+      padding-right: 20%;
 
-      ._submit_cancel_ {
-        width: 80%;
-        height: 40px;
-        margin: auto;
-        display: flex;
-        justify-content: flex-end;
+      button {
+        min-width: 15%;
+        width: auto;
+        height: 80%;
+        border: none;
+        border-radius: 8px;
+        margin: 0 1%;
+        font-size: large;
+        &:hover {
+          cursor: pointer;
+        }
 
-        button {
-          width: 20%;
-          height: 100%;
-          border: none;
-          border-radius: 8px;
-          margin: 0 1%;
-          &:hover {
-            cursor: pointer;
-          }
-
-          &:last-child {
-            background-color: #7ec980;
-            color: #ffffff;
-          }
+        &:last-child {
+          background-color: #7ec980;
+          color: #ffffff;
         }
       }
     }

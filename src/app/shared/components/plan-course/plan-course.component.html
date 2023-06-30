@@ -119,13 +119,20 @@
           <div class="top_">
             <div class="_top_left_">
               <label for="date">Choose date</label>
-              <input
-                type="date"
-                name="date"
-                id="d"
-                [(ngModel)]="myCourseData.date"
-                (input)="checkInputFields()"
-              />
+              <div class="time-picker">
+                <!-- <div [owlDateTimeTrigger]="dt5"></div> -->
+                <input
+                  type="text"
+                  [owlDateTimeTrigger]="dt5"
+                  [owlDateTime]="dt5"
+                  (dateTimeInput)="
+                    setStartDateDisplay($event); checkInputFields()
+                  "
+                  class="form__input"
+                  name="date"
+                />
+                <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+              </div>
             </div>
             <div class="_top_right_">
               <label for="ST">Start Time</label>
@@ -136,6 +143,7 @@
                 placeholder="10:00"
                 [(ngModel)]="myCourseData.startTime"
                 (input)="checkInputFields()"
+                class="form__input"
               />
 
               <label for="ET">End Time</label>
@@ -146,6 +154,7 @@
                 placeholder="11:30"
                 [(ngModel)]="myCourseData.endTime"
                 (input)="checkInputFields()"
+                class="form__input"
               />
 
               <label for="WP">Weekly Repeat</label>
@@ -154,8 +163,8 @@
                 id="wp"
                 [(ngModel)]="myCourseData.weeklyRepeat"
                 (change)="checkInputFields()"
+                class="form__input"
               >
-                <!-- <option disabled selected>-Choose-</option> -->
                 <option value="1">1 Week</option>
                 <option value="2">2 Week</option>
                 <option value="3">3 Week</option>
@@ -184,11 +193,10 @@
           </div>
         </form>
       </div>
-
-      <div class="_submit_cancel_">
-        <button (click)="exit()">Cancel</button>
-        <button (click)="formSubmit()">Create Course</button>
-      </div>
+    </div>
+    <div class="_submit_cancel_">
+      <button (click)="exit()">Cancel</button>
+      <button (click)="formSubmit()">Create Course</button>
     </div>
   </div>
 </div>
