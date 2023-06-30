@@ -1,5 +1,6 @@
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 export interface CourseData {
@@ -30,29 +31,42 @@ export class PlanCourseComponent {
   notExpandedTitle: string = 'CHOOSE DATE AND TIME';
 
   myCourseData: CourseData;
+  templateCourseData: CourseData;
   inputsFilled = false;
 
   dataToRender: CourseData[] = [];
   renderCount: number = 0;
 
-  formControl: FormGroup;
   editing: boolean = false;
   editingIndex: number;
   editingIcon = '../../../../assets/icons/drop-down-grey.svg';
   notEditingIcon = '../../../../assets/icons/edit.svg';
   constructor(private c: HomeComponent, private fb: FormBuilder) {
     this.myBoatData = c.getFilteredData();
-    // console.log(this.myBoatData);
-    // this.formControl = this.fb.group({
-    //   date: ['', Validators.required],
-    //   startTime: ['', Validators.required],
-    //   endTime: ['', Validators.required],
-    //   repeat: ['', Validators.required],
-    // });
+  }
 
-    // setInterval(() => {
-    //   console.log(this.chosenCoursesList);
-    // }, 5000);
+  dayName: string;
+  pickedDate: string;
+
+  setStartDateDisplay(time: any): void {
+    const date = new Date(time.value);
+    const dayNames = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+
+    this.dayName = dayNames[date.getDay()];
+    this.pickedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    this.myCourseData.date = this.pickedDate;
   }
 
   formSubmit() {
@@ -60,6 +74,7 @@ export class PlanCourseComponent {
   }
 
   checkInputFields() {
+    console.log(this.myCourseData);
     this.myCourseData.weekDay = this.getWeekDayName(
       this.myCourseData.date,
       'en-US'
@@ -124,10 +139,10 @@ export class PlanCourseComponent {
     }
 
     this.expandCalendar = !this.expandCalendar;
-    calDom.style.setProperty(
-      '--calendar-size',
-      this.expandCalendar ? '50%' : '10%'
-    );
+    // calDom.style.setProperty(
+    //   '--calendar-size',
+    //   this.expandCalendar ? '50%' : 'auto'
+    // );
     this.myCourseData = {
       date: '',
       startTime: '',
