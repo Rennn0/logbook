@@ -57,7 +57,7 @@ export class PlanCourseComponent {
   dayName: string;
   pickedDate: string;
   minDate: string;
-  constructor(private c: HomeComponent, private fb: FormBuilder) {
+  constructor(private c: HomeComponent) {
     this.myBoatData = c.getFilteredData();
     const today = new Date();
     today.setDate(today.getDate() + 7);
@@ -167,6 +167,8 @@ export class PlanCourseComponent {
       weeklyRepeat: 0,
       weekDay: '',
     };
+
+    this.toggleCalendar();
   }
 
   getWeekDayName(date: string, locale: string) {

@@ -410,12 +410,12 @@
                   </button>
                 </div>
                 <!-- ////////////////////////// -->
-                <!-- [class.disabled]="
-                  !chosenBoat ||
-                  trafficLightService?.terminalState ===
-                    publicTrafficLightEnum?.terminalRed
-                " -->
                 <button
+                  [class.disabled]="
+                    !chosenBoat ||
+                    trafficLightService?.terminalState ===
+                      publicTrafficLightEnum?.terminalRed
+                  "
                   (click)="showPlanCourse()"
                   class="btn btn--home-type btn--success-blue"
                 >
