@@ -1,6 +1,7 @@
+// import { AstMemoryEfficientTransformer } from '@angular/compiler';
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import * as moment from 'moment';
+// import { FormBuilder } from '@angular/forms';
+// import * as moment from 'moment';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 export interface CourseData {
@@ -122,7 +123,47 @@ export class PlanCourseComponent {
     console.log(this.finalForm);
   }
 
-  checkInputFields() {
+  timeValidator(start: string, end: string): boolean {
+    if (this.editing) {
+      return start < end;
+    }
+    const stTime = new Date(start);
+    const endTime = new Date(end);
+
+    return stTime < endTime;
+  }
+
+  timeWarning: boolean = false;
+
+  getClass() {
+    return this.timeWarning ? 'warning' : '';
+  }
+
+  // 1 = startTime 2 = endTime
+  checkInputFields(checkingIndex?: number) {
+    if (this.editing && checkingIndex === 1) {
+      this.myCourseData.startTime = this.timeCorrection(
+        this.myCourseData.startTime
+      );
+    }
+    if (this.editing && checkingIndex === 2) {
+      this.myCourseData.endTime = this.timeCorrection(
+        this.myCourseData.endTime
+      );
+    }
+
+    if (
+      this.myCourseData.startTime &&
+      this.myCourseData.endTime &&
+      !this.timeValidator(
+        this.myCourseData.startTime,
+        this.myCourseData.endTime
+      )
+    ) {
+      this.timeWarning = true;
+      return;
+    }
+    this.timeWarning = false;
     for (let key in this.myCourseData) {
       if (
         this.myCourseData[key] === '' ||
@@ -155,8 +196,24 @@ export class PlanCourseComponent {
     }
   }
 
+  timeCorrection(time: string): string {
+    let dateTime = new Date(time);
+    let hour = dateTime.getHours();
+    let min = dateTime.getMinutes();
+    time = `${hour.toString().padStart(2, '0')}:${min
+      .toString()
+      .padStart(2, '0')}`;
+    return time;
+  }
+
   onSubmit() {
     this.inputsFilled = false;
+
+    this.myCourseData.startTime = this.timeCorrection(
+      this.myCourseData.startTime
+    );
+    this.myCourseData.endTime = this.timeCorrection(this.myCourseData.endTime);
+
     this.dataToRender.push(this.myCourseData);
     this.renderCount++;
 
@@ -246,7 +303,7 @@ export class FilterBoatsPipe implements PipeTransform {
     );
 
     if (!pattern) {
-      return flattenedBoats.slice(0, 12);
+      return flattenedBoats.slice(0, 6);
     }
 
     const filteredBoats = flattenedBoats.filter((boat) =>

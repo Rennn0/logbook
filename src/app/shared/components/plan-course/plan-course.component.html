@@ -13,7 +13,7 @@
           id="search"
           placeholder="Boot suchen"
           [(ngModel)]="pattern"
-          (click)="renderOK()"
+          (click)="render ? renderNO() : renderOK()"
         />
 
         <img src="../../../../assets/icons/searchIcon.png" alt="search" />
@@ -120,23 +120,33 @@
                 type="text"
                 name="ST"
                 id="st"
-                placeholder="10:00"
+                [owlDateTimeTrigger]="dtT"
+                [owlDateTime]="dtT"
+                [placeholder]="
+                  myCourseData.startTime ? myCourseData.startTime : '10:00'
+                "
                 [(ngModel)]="myCourseData.startTime"
-                (input)="checkInputFields()"
+                (dateTimeInput)="checkInputFields(1)"
+                [ngClass]="getClass()"
                 class="form__input"
               />
-
+              <owl-date-time [pickerType]="'timer'" #dtT></owl-date-time>
               <label for="ET">End Time</label>
               <input
                 type="text"
                 name="ET"
                 id="et"
-                placeholder="11:30"
+                [owlDateTimeTrigger]="dtTT"
+                [owlDateTime]="dtTT"
+                [placeholder]="
+                  myCourseData.endTime ? myCourseData.endTime : '11:00'
+                "
                 [(ngModel)]="myCourseData.endTime"
-                (input)="checkInputFields()"
+                (dateTimeInput)="checkInputFields(2)"
                 class="form__input"
+                [ngClass]="{ warning: timeWarning }"
               />
-
+              <owl-date-time [pickerType]="'timer'" #dtTT></owl-date-time>
               <label for="WP">Weekly Repeat</label>
               <select
                 name="WP"
