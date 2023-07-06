@@ -1,20 +1,21 @@
-// import { AstMemoryEfficientTransformer } from '@angular/compiler';
 import { HostListener, Pipe, PipeTransform, Component } from '@angular/core';
-// import { FormBuilder } from '@angular/forms';
-// import * as moment from 'moment';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 
 export interface CourseData {
   date: string;
   startTime: string;
+  STinUTC?: number;
+  ETinUTC?: number;
   endTime: string;
   weeklyRepeat: number;
   weekDay: string;
 }
 
-export interface planCourseInterface {
-  boatIDs: string[];
-  courses: CourseData[];
+export interface finalForm {
+  id: string;
+  startDate: number;
+  endDate: number;
+  repeat: number;
 }
 
 @Component({
@@ -23,8 +24,9 @@ export interface planCourseInterface {
   styleUrls: ['./plan-course.component.scss'],
 })
 export class PlanCourseComponent {
-  @HostListener('document:keydown.escape', ['$keyEvent'])
-  escapeEvent(keyEvent: KeyboardEvent) {
+  @HostListener('document:keydown.escape', ['$keyEvent']) escapeEvent(
+    keyEvent: KeyboardEvent
+  ) {
     this.renderNO();
   }
 
@@ -86,6 +88,7 @@ export class PlanCourseComponent {
   }
 
   setStartDateDisplay(time: any): void {
+    this.dateForUnix = time.value;
     const date = new Date(time.value);
     const dayNames = [
       'Sunday',
@@ -107,20 +110,51 @@ export class PlanCourseComponent {
     this.myCourseData.weekDay = this.dayName;
   }
 
-  finalForm: planCourseInterface = {
-    boatIDs: [],
-    courses: [],
-  };
-  formSubmit() {
-    console.log(this.chosenCoursesList, this.dataToRender);
+  dateForUnix: string = '';
+  startForUnix: string = '';
+  endForUnix: string = '';
 
-    for (let item of this.chosenCoursesList) {
-      this.finalForm.boatIDs.push(item._id);
+  unixTransform() {
+    let date = new Date(this.dateForUnix);
+    let sTime = new Date(this.startForUnix);
+    let eTime = new Date(this.endForUnix);
+
+    const startCombined = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      sTime.getHours(),
+      sTime.getMinutes(),
+      sTime.getSeconds()
+    );
+    const endCombined = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      eTime.getHours(),
+      eTime.getMinutes(),
+      eTime.getSeconds()
+    );
+
+    this.myCourseData.ETinUTC = endCombined.getTime();
+    this.myCourseData.STinUTC = startCombined.getTime();
+  }
+
+  createdCourse: finalForm[] = [];
+
+  formSubmit() {
+    for (let boat of this.chosenCoursesList) {
+      for (let schedule of this.dataToRender) {
+        this.createdCourse.push({
+          id: boat._id,
+          startDate: schedule.STinUTC,
+          endDate: schedule.ETinUTC,
+          repeat: schedule.weeklyRepeat,
+        });
+      }
     }
 
-    this.finalForm.courses = [...this.dataToRender];
-
-    console.log(this.finalForm);
+    console.log(this.createdCourse);
   }
 
   timeValidator(start: string, end: string): boolean {
@@ -140,6 +174,7 @@ export class PlanCourseComponent {
   }
 
   // 1 = startTime 2 = endTime
+
   checkInputFields(checkingIndex?: number) {
     if (this.editing && checkingIndex === 1) {
       this.myCourseData.startTime = this.timeCorrection(
@@ -208,7 +243,9 @@ export class PlanCourseComponent {
 
   onSubmit() {
     this.inputsFilled = false;
-
+    this.startForUnix = this.myCourseData.startTime;
+    this.endForUnix = this.myCourseData.endTime;
+    this.unixTransform();
     this.myCourseData.startTime = this.timeCorrection(
       this.myCourseData.startTime
     );
